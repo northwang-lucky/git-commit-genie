@@ -30,6 +30,8 @@ interface OpenAIChatProviderOptions {
     baseURL?: string;
     endpointStateKey?: string;
     endpointCandidates?: Record<string, string>;
+    // 为 true 时模型清单以 /v1/models 实测结果为准，静态清单仅负责排序与离线兜底
+    useApiModelListing?: boolean;
 }
 
 /**
@@ -96,7 +98,9 @@ export abstract class OpenAIChatCompletionsService extends BaseLLMService {
     }
 
     protected async validateAndListModels(client: OpenAI, preferredModels: string[]): Promise<string[]> {
-        return this.utils.tryListModels(client, preferredModels, this.providerOptions.providerName);
+        return this.utils.tryListModels(client, preferredModels, this.providerOptions.providerName, {
+            preferApiModels: this.providerOptions.useApiModelListing === true
+        });
     }
 
     protected getUsageLoggerRegion(): string | undefined {

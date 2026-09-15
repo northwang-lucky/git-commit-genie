@@ -3,7 +3,7 @@
   "displayName": "%displayName%",
   "publisher": "Lune-99",
   "description": "%description%",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "license": "MIT",
   "engines": {
     "vscode": "^1.103.0"
@@ -277,7 +277,7 @@
             "gpt-5.2",
             "gpt-5-mini",
             "gpt-5-nano",
-            "deepseek-v4-flash",
+            "deepseek-flash",
             "deepseek-v4-pro",
             "claude-opus-4-7",
             "claude-opus-4-6",

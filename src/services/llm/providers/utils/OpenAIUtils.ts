@@ -440,12 +440,19 @@ export class OpenAICompatibleUtils extends BaseProviderUtils {
     async tryListModels(
         client: OpenAI,
         preferredModels: string[],
-        provider: string
+        provider: string,
+        options?: {
+            // 为 true 时以 /v1/models 实测列表为准：静态清单只决定已知模型的排序，其余实测模型照常透出
+            preferApiModels?: boolean;
+        }
     ): Promise<string[]> {
         try {
             const list = await client.models.list();
             const ids = list.data?.map(m => (m as any).id) || [];
             const available = preferredModels.filter(id => ids.includes(id));
+            if (options?.preferApiModels && ids.length) {
+                return [...available, ...ids.filter(id => !preferredModels.includes(id))];
+            }
             return available.length ? available : preferredModels;
         } catch (inner: any) {
             // Fallback: validate API key with a minimal request

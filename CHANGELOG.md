@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.2.3]
+- fix: DeepSeek model listing now treats the live `/v1/models` response as the source of truth (new opt-in `useApiModelListing` provider option), so officially renamed models show up in Manage Models immediately; the curated list (`deepseek-flash`, `deepseek-v4-pro`) remains as offline fallback and default-model preference.
+- fix: Renamed the retired `deepseek-v4-flash` id to the official `deepseek-flash` across the repository-analysis model enum, pricing table, and context-length table. The OpenRouter request id `deepseek/deepseek-v4-flash` is unchanged and now normalizes to the `deepseek-flash` pricing alias.
+- fix: Refreshed DeepSeek pricing to current official peak rates (off-peak is half).
+
 ## [3.2.2]
 - fix: Prevented duplicate `Repository Analysis Summary` headings when generated or synchronized analysis content already contains the file title.
 

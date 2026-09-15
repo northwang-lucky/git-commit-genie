@@ -26,7 +26,7 @@ export const MODEL_MAX_CONTEXT_TOKENS: Record<string, number> = {
   'gpt-5-nano': 400_000,
 
   // DeepSeek
-  'deepseek-v4-flash': 1_000_000,
+  'deepseek-flash': 1_000_000,
   'deepseek-v4-pro': 1_000_000,
 
   // Anthropic

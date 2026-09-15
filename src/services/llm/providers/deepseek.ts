@@ -14,13 +14,18 @@ export class DeepSeekService extends OpenAIChatCompletionsService {
             providerName: 'DeepSeek',
             modelStateKey: 'gitCommitGenie.deepseekModel',
             secretKey: 'gitCommitGenie.secret.deepseekApiKey',
-            baseURL: DEEPSEEK_API_URL
+            baseURL: DEEPSEEK_API_URL,
+            // 官方已将 flash 系列更名为 deepseek-flash，模型清单以 /v1/models 实测为准
+            useApiModelListing: true
         });
     }
 
+    /**
+     * 静态兜底清单（API 不可达时使用），id 与官方 /v1/models 实测结果保持一致。
+     */
     public listSupportedModels(): string[] {
         return [
-            'deepseek-v4-flash',
+            'deepseek-flash',
             'deepseek-v4-pro'
         ];
     }

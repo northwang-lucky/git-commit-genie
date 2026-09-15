@@ -23,8 +23,8 @@ export const OPENROUTER_MODEL_ALIAS_MAP: Readonly<Record<string, string>> = Obje
     'openai/gpt-5-mini': 'gpt-5-mini',
     'openai/gpt-5-nano': 'gpt-5-nano',
 
-    // DeepSeek family
-    'deepseek/deepseek-v4-flash': 'deepseek-v4-flash',
+    // DeepSeek family（request id 为 OpenRouter 实测命名，canonical alias 跟随官方 id）
+    'deepseek/deepseek-v4-flash': 'deepseek-flash',
     'deepseek/deepseek-v4-pro': 'deepseek-v4-pro',
 
     // Anthropic family

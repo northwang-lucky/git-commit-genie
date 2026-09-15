@@ -216,7 +216,7 @@ export class ServiceRegistry {
 
         const preferredByProvider: Record<string, string[]> = {
             openai: ['gpt-5.4-mini', 'gpt-5.6-luna', 'gpt-5.6-terra', 'gpt-5.6-sol', 'gpt-5.5', 'gpt-5.4', 'gpt-5.4-nano', 'gpt-5-mini', 'gpt-5', 'gpt-5.2', 'gpt-5-nano'],
-            deepseek: ['deepseek-v4-flash', 'deepseek-v4-pro'],
+            deepseek: ['deepseek-flash', 'deepseek-v4-pro'],
             anthropic: ['claude-sonnet-4-6', 'claude-sonnet-5', 'claude-opus-5', 'claude-fable-5'],
             gemini: ['gemini-3-flash-preview', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-2.5-flash', 'gemini-3.1-pro-preview', 'gemini-2.5-pro'],
             qwen: ['qwen3.5-plus', 'qwen3.7-plus', 'qwen3.7-flash', 'qwen3.6-flash', 'qwen3.5-flash', 'qwen-plus-latest', 'qwen-plus', 'qwen3.7-max'],

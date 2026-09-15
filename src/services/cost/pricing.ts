@@ -116,9 +116,9 @@ export const PRICING_TABLE: Record<string, ModelPricing> = {
 
     // lite variants removed
 
-    // DeepSeek (USD)
-    'deepseek-v4-flash': { input: 0.14, output: 0.28, cached: 0.0028 },
-    'deepseek-v4-pro': { input: 0.435, output: 0.87, cached: 0.003625 },
+    // DeepSeek (USD, 官方 peak 价，off-peak 减半)
+    'deepseek-flash': { input: 0.3, output: 1.2, cached: 0.006 },
+    'deepseek-v4-pro': { input: 1.32, output: 3.96, cached: 0.044 },
 
     // GLM (USD)
     'glm-5.2': { input: cny(8), output: cny(28), cached: cny(2) },
