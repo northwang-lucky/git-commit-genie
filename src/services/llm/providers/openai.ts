@@ -13,7 +13,7 @@ import { safeRun } from '../../../utils/safeRun';
 import { getRequestTypeLabel, getValidationSchemaFor } from './utils/requestTypeMaps';
 import { ProviderRuntimeConfig, ProviderRules } from './utils/BaseProviderUtils';
 import { commitMessageSchema } from './schemas/common';
-import { ProviderError } from './errors/providerError';
+import { ProviderError } from './errors/ProviderError';
 
 const SECRET_OPENAI_API_KEY = 'gitCommitGenie.secret.openaiApiKey';
 

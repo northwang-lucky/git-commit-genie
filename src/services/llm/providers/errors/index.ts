@@ -1,1 +1,1 @@
-export * from './providerError';
+export * from './ProviderError';

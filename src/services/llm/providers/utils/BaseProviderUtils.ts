@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { L10N_KEYS as I18N } from '../../../../i18n/keys';
-import { ProviderError } from '../errors/providerError';
+import { ProviderError } from '../errors/ProviderError';
 
 export interface ProviderRuntimeConfig {
     model: string;

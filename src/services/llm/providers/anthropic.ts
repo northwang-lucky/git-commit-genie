@@ -14,7 +14,7 @@ import { getRequestTypeLabel, getValidationSchemaFor } from './utils/requestType
 import { ProviderRuntimeConfig, ProviderRules } from './utils/BaseProviderUtils';
 import { ChatFn, ChatMessage, GenerateCommitMessageOptions, LLMError, LLMResponse } from '../llmTypes';
 import { BaseLLMService } from '../baseLLMService';
-import { ProviderError } from './errors/providerError';
+import { ProviderError } from './errors/ProviderError';
 import {
     AnthropicCommitMessageTool,
     AnthropicFileSummaryTool,

@@ -6,7 +6,7 @@ import { TemplateService } from '../../template/templateService';
 import { IRepositoryAnalysisService } from '../analysis/analysisTypes';
 import { Repository } from '../git/git';
 import { RepoService } from '../repo/repo';
-import { ProviderError } from './providers/errors/providerError';
+import { ProviderError } from './providers/errors/ProviderError';
 import { logger } from '../logger';
 import { safeRun } from '../../utils/safeRun';
 import {

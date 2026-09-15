@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { BaseProviderUtils } from './BaseProviderUtils';
 import { logger } from '../../../logger';
 import { ToolUseBlock } from '@anthropic-ai/sdk/resources';
-import { ProviderError } from '../errors/providerError';
+import { ProviderError } from '../errors/ProviderError';
 
 /**
  * Anthropic models that reject non-default sampling parameters.

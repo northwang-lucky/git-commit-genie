@@ -13,7 +13,7 @@ import { safeRun } from '../../../utils/safeRun';
 import { getRequestTypeLabel, getValidationSchemaFor } from './utils/requestTypeMaps';
 import { ProviderRules } from './utils/BaseProviderUtils';
 import { commitMessageSchema } from './schemas/common';
-import { ProviderError } from './errors/providerError';
+import { ProviderError } from './errors/ProviderError';
 
 interface OpenAIChatRuntimeConfig {
     model: string;

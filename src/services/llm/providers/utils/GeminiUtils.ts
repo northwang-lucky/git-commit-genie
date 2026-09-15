@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { BaseProviderUtils } from './BaseProviderUtils';
 import { logger } from '../../../logger/index';
-import { ProviderError } from '../errors/providerError';
+import { ProviderError } from '../errors/ProviderError';
 
 import { Content, GoogleGenAI, GenerateContentConfig } from '@google/genai';
 import { ChatMessage, RequestType } from '../../llmTypes';

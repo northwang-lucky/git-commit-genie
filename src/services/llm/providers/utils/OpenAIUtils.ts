@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { zodTextFormat } from './openAiZodPatch';
 import { BaseProviderUtils } from './BaseProviderUtils';
 import { logger } from '../../../logger';
-import { ProviderError } from '../errors/providerError';
+import { ProviderError } from '../errors/ProviderError';
 import { isOpenAIChatProvider, isOpenAIResponsesProvider } from '../config/ProviderConfig';
 
 import { ChatMessage, RequestType } from "../../llmTypes";

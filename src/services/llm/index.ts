@@ -31,4 +31,4 @@ export { AnthropicService } from './providers/anthropic';
 export { GeminiService } from './providers/gemini';
 
 // Error handling
-export { ProviderError } from './providers/errors/providerError';
+export { ProviderError } from './providers/errors/ProviderError';
