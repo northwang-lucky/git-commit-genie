@@ -20,13 +20,13 @@ export class ModelCommands {
     async register(): Promise<void> {
         // Manage Models: provider -> API key -> model selection
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.manageModels', this.manageModels.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.manageModels', this.manageModels.bind(this))
         );
     }
 
     private async manageModels(): Promise<void> {
         // Get current repo analysis model for display
-        const config = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+        const config = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
         const currentRepoModel = config.get<string>('model', 'general') || 'general';
         const repoModelDesc = currentRepoModel === 'general'
             ? undefined
@@ -85,11 +85,11 @@ export class ModelCommands {
             }
             qwenRegion = regionPick.value;
             // Save region selection
-            await this.context.globalState.update('gitCommitGenie.qwenRegion', qwenRegion);
+            await this.context.globalState.update('gitCommitGeniex.qwenRegion', qwenRegion);
         }
 
         if (providerPick.value === 'local') {
-            const localCfg = vscode.workspace.getConfiguration('gitCommitGenie');
+            const localCfg = vscode.workspace.getConfiguration('gitCommitGeniex');
             const currentBaseUrl = (localCfg.get<string>('local.baseUrl', 'http://127.0.0.1:11434/v1') || '').trim();
             const enteredBaseUrl = await this.promptForLocalBaseUrl(currentBaseUrl || 'http://127.0.0.1:11434/v1');
             if (!enteredBaseUrl) {
@@ -302,7 +302,7 @@ export class ModelCommands {
     }
 
     private async updateProviderAndModel(providerPick: any, modelPick: any, modelStateKey: string, apiKey: string, existingKey: string | undefined): Promise<void> {
-        await this.context.globalState.update('gitCommitGenie.provider', providerPick.value);
+        await this.context.globalState.update('gitCommitGeniex.provider', providerPick.value);
         const service = this.serviceRegistry.getLLMService(providerPick.value);
 
         // Only store the key if it actually changed (avoid unnecessary SecretStorage writes)
@@ -325,14 +325,14 @@ export class ModelCommands {
      * Manage repository analysis model configuration
      */
     private async manageRepoAnalysisModel(): Promise<void> {
-        const config = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+        const config = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
         const currentRepoModel = config.get<string>('model', 'general') || 'general';
 
         // Collect all available models from all providers
         const allModels: Array<{ label: string, value: string, provider: string, description?: string }> = [];
 
         // Add "Use default model" option at the top
-        const generalProvider = this.context.globalState.get<string>('gitCommitGenie.provider', 'openai') || 'openai';
+        const generalProvider = this.context.globalState.get<string>('gitCommitGeniex.provider', 'openai') || 'openai';
         const generalModelKey = this.getModelStateKey(generalProvider);
         const generalModel = this.context.globalState.get<string>(generalModelKey, '');
         const useDefaultDesc = currentRepoModel === 'general' && generalModel

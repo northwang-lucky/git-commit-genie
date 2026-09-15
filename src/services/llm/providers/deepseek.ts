@@ -12,8 +12,8 @@ export class DeepSeekService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'DeepSeek',
-            modelStateKey: 'gitCommitGenie.deepseekModel',
-            secretKey: 'gitCommitGenie.secret.deepseekApiKey',
+            modelStateKey: 'gitCommitGeniex.deepseekModel',
+            secretKey: 'gitCommitGeniex.secret.deepseekApiKey',
             baseURL: DEEPSEEK_API_URL,
             // 官方已将 flash 系列更名为 deepseek-flash，模型清单以 /v1/models 实测为准
             useApiModelListing: true

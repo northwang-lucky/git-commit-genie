@@ -289,7 +289,7 @@ export abstract class BaseLLMService implements LLMService {
         }
 
         // Preferred output language for generated commit message
-        let targetLanguage = cfg.get<string>('gitCommitGenie.commitLanguage', 'auto') || 'auto';
+        let targetLanguage = cfg.get<string>('gitCommitGeniex.commitLanguage', 'auto') || 'auto';
         if (!targetLanguage || targetLanguage === 'auto') {
             try { targetLanguage = (vscode.env.language || 'en'); } catch { targetLanguage = 'en'; }
         }

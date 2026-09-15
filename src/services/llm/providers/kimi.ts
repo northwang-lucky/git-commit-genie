@@ -13,10 +13,10 @@ export class KimiService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'Kimi',
-            modelStateKey: 'gitCommitGenie.kimiModel',
-            secretKey: 'gitCommitGenie.secret.kimiApiKey',
+            modelStateKey: 'gitCommitGeniex.kimiModel',
+            secretKey: 'gitCommitGeniex.secret.kimiApiKey',
             baseURL: KIMI_API_URL_CHINA,
-            endpointStateKey: 'gitCommitGenie.kimiRegion',
+            endpointStateKey: 'gitCommitGeniex.kimiRegion',
             endpointCandidates: {
                 china: KIMI_API_URL_CHINA,
                 intl: KIMI_API_URL_INTL

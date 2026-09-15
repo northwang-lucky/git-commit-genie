@@ -49,13 +49,13 @@ export abstract class BaseProviderUtils {
 
     /**
  * Get unified provider configuration combining common settings with provider-specific model
- * @param providerKey The provider's configuration key prefix (e.g., 'gitCommitGenie')
+ * @param providerKey The provider's configuration key prefix (e.g., 'gitCommitGeniex')
  * @param modelStateKey The global state key for the model (e.g., 'openaiModel')
  * @returns Configuration object with model, useChain, chainMaxParallel, maxRetries
  */
     /**
      * Get unified provider configuration combining common settings with provider-specific model
-     * @param providerKey The provider's configuration key prefix (e.g., 'gitCommitGenie')
+     * @param providerKey The provider's configuration key prefix (e.g., 'gitCommitGeniex')
      * @param modelStateKey The global state key for the model (e.g., 'openaiModel')
      * @returns Configuration object with model, useChain, chainMaxParallel, maxRetries
      */
@@ -79,7 +79,7 @@ export abstract class BaseProviderUtils {
      */
     public getRepoAnalysisOverrideModel(supportedModels: string[]): string | null {
         try {
-            const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+            const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
             const value = (cfg.get<string>('model', 'general') || 'general').trim();
             if (!value || value === 'general') {
                 return null;
@@ -118,7 +118,7 @@ export abstract class BaseProviderUtils {
      * Show rate limit warning (with throttling to avoid spam)
      */
     public async maybeWarnRateLimit(provider: string, model: string): Promise<void> {
-        const key = `gitCommitGenie.${provider.toLowerCase()}RateLimitWarned`;
+        const key = `gitCommitGeniex.${provider.toLowerCase()}RateLimitWarned`;
         const lastWarned = this.context.globalState.get<number>(key, 0) ?? 0;
         const now = Date.now();
 
@@ -136,7 +136,7 @@ export abstract class BaseProviderUtils {
         );
 
         if (choice === vscode.l10n.t(I18N.actions.openSettings)) {
-            vscode.commands.executeCommand('workbench.action.openSettings', 'gitCommitGenie.chain.maxParallel');
+            vscode.commands.executeCommand('workbench.action.openSettings', 'gitCommitGeniex.chain.maxParallel');
         }
     }
 
@@ -144,7 +144,7 @@ export abstract class BaseProviderUtils {
      * Get common configuration values
      */
     public getCommonConfig() {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         return {
             useChain: cfg.get<boolean>('chain.enabled', true),
             chainMaxParallel: cfg.get<number>('chain.maxParallel', 2),
@@ -156,7 +156,7 @@ export abstract class BaseProviderUtils {
      * Read global max retries for provider calls
      */
     public getMaxRetries(): number {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         return cfg.get<number>('llm.maxRetries', 2);
     }
 
@@ -164,7 +164,7 @@ export abstract class BaseProviderUtils {
      * Read global temperature for provider calls
      */
     public getTemperature(): number {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         return cfg.get<number>('llm.temperature', 1);
     }
 

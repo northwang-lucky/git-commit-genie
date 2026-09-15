@@ -54,7 +54,7 @@ describe('RagRuntimeService.isRagEnabled', () => {
         const enabled = await service.isRagEnabled();
 
         assert.strictEqual(enabled, true);
-        assert.strictEqual(getConfigurationStub.calledOnceWithExactly('gitCommitGenie.rag'), true);
+        assert.strictEqual(getConfigurationStub.calledOnceWithExactly('gitCommitGeniex.rag'), true);
         assert.strictEqual(configGetStub.calledWith('enabled', false), true);
         assert.strictEqual(secretsGetStub.calledOnceWithExactly(RAG_EMBEDDING_API_KEY_SECRET), true);
     });

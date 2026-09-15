@@ -4,8 +4,8 @@
 
 export const L10N_KEYS = {
   statusBar: {
-    tooltipConfigured: 'Git Commit Genie: {0} / {1}',
-    tooltipNeedConfig: 'Git Commit Genie: {0} — click to configure models',
+    tooltipConfigured: 'Git Commit GenieX: {0} / {1}',
+    tooltipNeedConfig: 'Git Commit GenieX: {0} — click to configure models',
     selectModel: 'Select Model',
     chainBadge: ' · Thinking',
     analysisModel: 'Repository Analysis Model: {0} / {1}'
@@ -112,7 +112,7 @@ export const L10N_KEYS = {
     chainMaxParallelLabel: 'Max Parallel Chains'
   },
   genieMenu: {
-    placeholder: 'Git Commit Genie',
+    placeholder: 'Git Commit GenieX',
     manageModels: '$(gear) Manage Models',
     cancelAnalysis: '$(stop-circle) Cancel Analysis',
     refreshAnalysis: '$(refresh) Refresh Analysis',

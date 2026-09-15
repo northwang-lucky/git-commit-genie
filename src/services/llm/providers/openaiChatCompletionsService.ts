@@ -190,7 +190,7 @@ export abstract class OpenAIChatCompletionsService extends BaseLLMService {
     }
 
     protected getProviderConfig(): OpenAIChatRuntimeConfig {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         return {
             useChain: cfg.get<boolean>('chain.enabled', true),
             chainMaxParallel: cfg.get<number>('chain.maxParallel', 2),

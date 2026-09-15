@@ -10,11 +10,11 @@ export class CostCommands {
     public registerCommands(): void {
         // Register cost-related commands
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.showRepositoryCost', this.showRepositoryCost.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.showRepositoryCost', this.showRepositoryCost.bind(this))
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.resetRepositoryCost', this.resetRepositoryCost.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.resetRepositoryCost', this.resetRepositoryCost.bind(this))
         );
     }
 

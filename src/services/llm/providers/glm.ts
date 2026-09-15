@@ -13,10 +13,10 @@ export class GLMService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'GLM',
-            modelStateKey: 'gitCommitGenie.glmModel',
-            secretKey: 'gitCommitGenie.secret.glmApiKey',
+            modelStateKey: 'gitCommitGeniex.glmModel',
+            secretKey: 'gitCommitGeniex.secret.glmApiKey',
             baseURL: GLM_API_URL_CHINA,
-            endpointStateKey: 'gitCommitGenie.glmRegion',
+            endpointStateKey: 'gitCommitGeniex.glmRegion',
             endpointCandidates: {
                 china: GLM_API_URL_CHINA,
                 intl: GLM_API_URL_INTL_ALIAS

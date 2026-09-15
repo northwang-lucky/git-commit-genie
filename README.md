@@ -1,14 +1,16 @@
 <div align="center">
 
-# Git Commit Genie
+# Git Commit GenieX
 
 Chinese version: [中文说明](./docs/README.zh-CN.md)
 
 </div>
 
+> **Fork notice**: This is a fork of [Nouvelle-Lune/git-commit-genie](https://github.com/Nouvelle-Lune/git-commit-genie), published on Open VSX as [`northwang-lucky.git-commit-geniex`](https://open-vsx.org/extension/northwang-lucky/git-commit-geniex). Compared with upstream 3.2.2 it fixes the DeepSeek model listing (3.2.3) and uses fully independent runtime identities — command ids `git-commit-geniex.*` and settings prefix `gitCommitGeniex.*` — so it can be installed alongside the upstream extension without conflicts.
+
 ## Overview
 
-Git Commit Genie analyzes your staged Git diff and generates high‑quality Conventional Commits style messages using mainstream LLM providers (OpenAI / DeepSeek / Anthropic / Gemini / Qwen / GLM / Kimi / OpenRouter). Features intelligent repository analysis that understands your project structure and tech stack to provide better context for commit generation. Supports optional multi‑step Thinking mode and user template strategy to improve structural consistency and style alignment.
+Git Commit GenieX analyzes your staged Git diff and generates high‑quality Conventional Commits style messages using mainstream LLM providers (OpenAI / DeepSeek / Anthropic / Gemini / Qwen / GLM / Kimi / OpenRouter). Features intelligent repository analysis that understands your project structure and tech stack to provide better context for commit generation. Supports optional multi‑step Thinking mode and user template strategy to improve structural consistency and style alignment.
 
 <table style="width: 100%; border-spacing: 10px;">
   <tr>
@@ -46,8 +48,8 @@ Basic format:
 
 - Small or trivial commits: prefer a lightweight, fast model to speed up generation and reduce token usage.
 - Large, multi‑file commits: consider switching to a stronger model for better analysis and structure.
-- You can switch models anytime via "Git Commit Genie: Manage Models".
-- Toggle Thinking quickly via "Git Commit Genie: Enable / Disable thinking mode".
+- You can switch models anytime via "Git Commit GenieX: Manage Models".
+- Toggle Thinking quickly via "Git Commit GenieX: Enable / Disable thinking mode".
 
 ## Core Features
 
@@ -69,62 +71,62 @@ Basic format:
 ## How It Works
 
 1. You stage your changes.
-2. Run command: `Git Commit Genie: Generate commit message` (SCM toolbar button or Command Palette).
+2. Run command: `Git Commit GenieX: Generate commit message` (SCM toolbar button or Command Palette).
 3. Result is injected into the repository input box—review / tweak / commit.
 
 
 ## Configuration
 
-All settings are under: `Git Commit Genie`.
+All settings are under: `Git Commit GenieX`.
 
 | Setting                                             | Type    | Default   | Description                                                                                                                                                                                                                                                         |
 | --------------------------------------------------- | ------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gitCommitGenie.autoStageAllForDiff`                | boolean | false     | Only when the staging area is empty: temporarily stage all changes to build the diff, then restore your staging state. Use with caution—this may include unrelated changes in the prompt.                                                                           |
-| `gitCommitGenie.chain.enabled`                      | boolean | false     | Enable multi-step Thinking mode for commit generation (more detailed and accurate, better template adherence, but higher latency and token usage).                                                                                                                  |
-| `gitCommitGenie.chain.maxParallel`                  | number  | 2         | Maximum parallel LLM calls used by Thinking mode across all providers. Increase carefully to avoid provider rate limits.                                                                                                                                            |
-| `gitCommitGenie.llm.maxRetries`                     | number  | 2         | Max retry attempts for API request failures.                                                                                                                                                                                                                        |
-| `gitCommitGenie.llm.temperature`                    | number  | 1         | Temperature (0–2). Default 1. Some provider/model combinations only accept 1; changing this value may trigger invalid-temperature errors or less stable outputs.                                                                                                  |
-| `gitCommitGenie.rag.enabled`                        | boolean | false     | Enable RAG to keep commit message generation style consistent (requires sufficient historical commits to build a local style index). Configure the embedding API key first via the "Configure RAG Embedding API Key" command.                                   |
-| `gitCommitGenie.rag.embedding.baseUrl`              | string  | `""`      | Base URL for the embeddings API used by RAG. Must be compatible with OpenAI SDK format.                                                                                                                                                                        |
-| `gitCommitGenie.rag.embedding.model`                | string  | `""`      | Embedding model used by RAG.                                                                                                                                                                                                                                    |
-| `gitCommitGenie.rag.embedding.dimensions`           | number  | 0         | Optional embedding dimensions used by RAG (0 = auto-detect).                                                                                                                                                                                                     |
-| `gitCommitGenie.rag.embedding.batchSize`            | number  | 10        | Batch size used when RAG generates embeddings (1–512).                                                                                                                                                                                                           |
-| `gitCommitGenie.repositoryAnalysis.enabled`         | boolean | true      | Enable repository analysis to provide better context for commit message generation.                                                                                                                                                                                 |
-| `gitCommitGenie.repositoryAnalysis.excludePatterns` | array   | []        | File patterns to exclude from repository analysis scanning (gitignore-style).                                                                                                                                                                                       |
-| `gitCommitGenie.repositoryAnalysis.updateThreshold` | number  | 10        | Number of commits after which to update the repository analysis.                                                                                                                                                                                                    |
-| `gitCommitGenie.repositoryAnalysis.MaxCount`        | number  | unlimited | Maximum number of analysis steps allowed during repository exploration. Set to -1 for unlimited steps (default).                                                                                                                                                    |
-| `gitCommitGenie.repositoryAnalysis.model`           | enum    | general   | Model used for repository analysis. Pick any supported model across providers; the provider automatically switches to match your selection. Choose "Use default model" to reuse your main commit message model. You can configure this via "Manage Models" command. |
-| `gitCommitGenie.commitLanguage`                     | string  | `auto`    | Target language for generated commit messages. Options: `auto`, `en`, `zh-CN`, `zh-TW`, `ja`, `ko`, `de`, `fr`, `es`, `pt`, `ru`, `it`.                                                                                                                             |
-| `gitCommitGenie.typingAnimationSpeed`               | number  | 15        | Speed of the commit message box typing animation in milliseconds per character. Set to -1 to disable the animation.                                                                                                                                                 |
-| `gitCommitGenie.showUsageCost`                      | boolean | true      | When enabled, a brief notification displays the estimated total cost for the current generation.                                                                                                                                                                    |
-| `gitCommitGenie.ui.stageNotifications.enabled`      | boolean | true      | Show bottom‑right stage notifications during Thinking. Title‑less minimal bubble.                                                                                                                                                                                   |
+| `gitCommitGeniex.autoStageAllForDiff`                | boolean | false     | Only when the staging area is empty: temporarily stage all changes to build the diff, then restore your staging state. Use with caution—this may include unrelated changes in the prompt.                                                                           |
+| `gitCommitGeniex.chain.enabled`                      | boolean | false     | Enable multi-step Thinking mode for commit generation (more detailed and accurate, better template adherence, but higher latency and token usage).                                                                                                                  |
+| `gitCommitGeniex.chain.maxParallel`                  | number  | 2         | Maximum parallel LLM calls used by Thinking mode across all providers. Increase carefully to avoid provider rate limits.                                                                                                                                            |
+| `gitCommitGeniex.llm.maxRetries`                     | number  | 2         | Max retry attempts for API request failures.                                                                                                                                                                                                                        |
+| `gitCommitGeniex.llm.temperature`                    | number  | 1         | Temperature (0–2). Default 1. Some provider/model combinations only accept 1; changing this value may trigger invalid-temperature errors or less stable outputs.                                                                                                  |
+| `gitCommitGeniex.rag.enabled`                        | boolean | false     | Enable RAG to keep commit message generation style consistent (requires sufficient historical commits to build a local style index). Configure the embedding API key first via the "Configure RAG Embedding API Key" command.                                   |
+| `gitCommitGeniex.rag.embedding.baseUrl`              | string  | `""`      | Base URL for the embeddings API used by RAG. Must be compatible with OpenAI SDK format.                                                                                                                                                                        |
+| `gitCommitGeniex.rag.embedding.model`                | string  | `""`      | Embedding model used by RAG.                                                                                                                                                                                                                                    |
+| `gitCommitGeniex.rag.embedding.dimensions`           | number  | 0         | Optional embedding dimensions used by RAG (0 = auto-detect).                                                                                                                                                                                                     |
+| `gitCommitGeniex.rag.embedding.batchSize`            | number  | 10        | Batch size used when RAG generates embeddings (1–512).                                                                                                                                                                                                           |
+| `gitCommitGeniex.repositoryAnalysis.enabled`         | boolean | true      | Enable repository analysis to provide better context for commit message generation.                                                                                                                                                                                 |
+| `gitCommitGeniex.repositoryAnalysis.excludePatterns` | array   | []        | File patterns to exclude from repository analysis scanning (gitignore-style).                                                                                                                                                                                       |
+| `gitCommitGeniex.repositoryAnalysis.updateThreshold` | number  | 10        | Number of commits after which to update the repository analysis.                                                                                                                                                                                                    |
+| `gitCommitGeniex.repositoryAnalysis.MaxCount`        | number  | unlimited | Maximum number of analysis steps allowed during repository exploration. Set to -1 for unlimited steps (default).                                                                                                                                                    |
+| `gitCommitGeniex.repositoryAnalysis.model`           | enum    | general   | Model used for repository analysis. Pick any supported model across providers; the provider automatically switches to match your selection. Choose "Use default model" to reuse your main commit message model. You can configure this via "Manage Models" command. |
+| `gitCommitGeniex.commitLanguage`                     | string  | `auto`    | Target language for generated commit messages. Options: `auto`, `en`, `zh-CN`, `zh-TW`, `ja`, `ko`, `de`, `fr`, `es`, `pt`, `ru`, `it`.                                                                                                                             |
+| `gitCommitGeniex.typingAnimationSpeed`               | number  | 15        | Speed of the commit message box typing animation in milliseconds per character. Set to -1 to disable the animation.                                                                                                                                                 |
+| `gitCommitGeniex.showUsageCost`                      | boolean | true      | When enabled, a brief notification displays the estimated total cost for the current generation.                                                                                                                                                                    |
+| `gitCommitGeniex.ui.stageNotifications.enabled`      | boolean | true      | Show bottom‑right stage notifications during Thinking. Title‑less minimal bubble.                                                                                                                                                                                   |
 
 
 ## Commands
 
 Search these in the Command Palette:
 
-- Git Commit Genie: Generate commit message
-- Git Commit Genie: Stop generate (visible during generation)
-- Git Commit Genie: Manage Models
-- Git Commit Genie: Enable / Disable thinking mode
-- Git Commit Genie: Select/Create Template
-- Git Commit Genie: View Repository Analysis (opens analysis as editable Markdown)
-- Git Commit Genie: Refresh Repository Analysis (triggers new analysis)
-- Git Commit Genie: Clear Repository Analysis Cache (clears analysis cache)
-- Git Commit Genie: Cancel Repository Analysis (cancels analysis process)
-- Git Commit Genie: Configure RAG Embedding API Key (stores embedding API key in SecretStorage)
-- Git Commit Genie: Clear RAG Embedding API Key (removes embedding API key)
-- Git Commit Genie: Start RAG Indexing (indexes all historical commits for style retrieval)
-- Git Commit Genie: Stop RAG Indexing (cancels in-progress indexing)
-- Git Commit Genie: Menu
-- Git Commit Genie: Show Repository Cost
-- Git Commit Genie: Reset Repository Cost
+- Git Commit GenieX: Generate commit message
+- Git Commit GenieX: Stop generate (visible during generation)
+- Git Commit GenieX: Manage Models
+- Git Commit GenieX: Enable / Disable thinking mode
+- Git Commit GenieX: Select/Create Template
+- Git Commit GenieX: View Repository Analysis (opens analysis as editable Markdown)
+- Git Commit GenieX: Refresh Repository Analysis (triggers new analysis)
+- Git Commit GenieX: Clear Repository Analysis Cache (clears analysis cache)
+- Git Commit GenieX: Cancel Repository Analysis (cancels analysis process)
+- Git Commit GenieX: Configure RAG Embedding API Key (stores embedding API key in SecretStorage)
+- Git Commit GenieX: Clear RAG Embedding API Key (removes embedding API key)
+- Git Commit GenieX: Start RAG Indexing (indexes all historical commits for style retrieval)
+- Git Commit GenieX: Stop RAG Indexing (cancels in-progress indexing)
+- Git Commit GenieX: Menu
+- Git Commit GenieX: Show Repository Cost
+- Git Commit GenieX: Reset Repository Cost
 
 SCM Title Bar shows “Generate commit message” or “Stop generate” depending on state.
 
 ## Template Authoring
-Using command `Git Commit Genie: Select/Create Template`to select or create a template file.
+Using command `Git Commit GenieX: Select/Create Template`to select or create a template file.
 
 <img src="./media/demo2.gif" width="600"/>
 

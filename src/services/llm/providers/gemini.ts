@@ -26,7 +26,7 @@ import {
 
 import { commitMessageSchema } from './schemas/common';
 
-const SECRET_GEMINI_API_KEY = 'gitCommitGenie.secret.geminiApiKey';
+const SECRET_GEMINI_API_KEY = 'gitCommitGeniex.secret.geminiApiKey';
 
 /**
  * Google Gemini service implementation using @google/genai
@@ -105,14 +105,14 @@ export class GeminiService extends BaseLLMService {
      * Get the current model configuration
      */
     protected getCurrentModel(): string {
-        return this.context.globalState.get<string>('gitCommitGenie.geminiModel', '');
+        return this.context.globalState.get<string>('gitCommitGeniex.geminiModel', '');
     }
 
     /**
      * Get Gemini-specific configuration
      */
     private getConfig() {
-        return this.utils.getProviderConfig('gitCommitGenie', 'geminiModel');
+        return this.utils.getProviderConfig('gitCommitGeniex', 'geminiModel');
     }
 
     async generateCommitMessage(diffs: DiffData[], options?: GenerateCommitMessageOptions): Promise<LLMResponse | LLMError> {

@@ -7,11 +7,11 @@ import { logger } from '../services/logger';
 import { StatusBarManager } from './StatusBarManager';
 
 /**
- * WebviewViewProvider for Git Commit Genie panel
+ * WebviewViewProvider for Git Commit GenieX panel
  * Displays repository list with costs
  */
 export class WebviewProvider implements vscode.WebviewViewProvider {
-    public static readonly viewType = 'gitCommitGenie.panel';
+    public static readonly viewType = 'gitCommitGeniex.panel';
     private static readonly REPO_UPDATE_DEBOUNCE_MS = 150;
 
     private _view?: vscode.WebviewView;
@@ -196,13 +196,13 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
                     try { logger.flushLogsToWebview(); } catch { /* ignore */ }
                 } else if (data.type === 'refreshAnalysis') {
                     // Trigger refresh analysis command for specific repo
-                    vscode.commands.executeCommand('git-commit-genie.refreshRepositoryAnalysis', data.repoPath);
+                    vscode.commands.executeCommand('git-commit-geniex.refreshRepositoryAnalysis', data.repoPath);
                 } else if (data.type === 'openGenieMenu') {
                     // Open Genie menu
-                    vscode.commands.executeCommand('git-commit-genie.genieMenu');
+                    vscode.commands.executeCommand('git-commit-geniex.genieMenu');
                 } else if (data.type === 'cancelAnalysis') {
                     // Cancel repository analysis
-                    vscode.commands.executeCommand('git-commit-genie.cancelRepositoryAnalysis');
+                    vscode.commands.executeCommand('git-commit-geniex.cancelRepositoryAnalysis');
                 } else if (data.type === 'repairRagEmbeddings') {
                     // Repair missing RAG embeddings for a specific repo. Resolve the repo by path
                     // and forward an arg shape consistent with other repo-targeted commands.
@@ -211,7 +211,7 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
                         .getRepositories()
                         .find(r => r.rootUri.fsPath === data.repoPath);
                     if (repo) {
-                        vscode.commands.executeCommand('git-commit-genie.repairRagEmbeddings', { rootUri: repo.rootUri });
+                        vscode.commands.executeCommand('git-commit-geniex.repairRagEmbeddings', { rootUri: repo.rootUri });
                     }
                 }
             })
@@ -315,8 +315,8 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
         const ragRuntimeService = this._serviceRegistry.getRagRuntimeService();
         const repositories = repoService.getRepositories();
 
-        const isRepoAnalysisEnabled = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis').get<boolean>('enabled', true);
-        const isRagEnabled = vscode.workspace.getConfiguration('gitCommitGenie.rag').get<boolean>('enabled', false);
+        const isRepoAnalysisEnabled = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis').get<boolean>('enabled', true);
+        const isRagEnabled = vscode.workspace.getConfiguration('gitCommitGeniex.rag').get<boolean>('enabled', false);
         const runningRepoPath = this._statusBar?.isRepoAnalysisRunning() ? (this._statusBar as any)?.['analysisState']?.runningRepoPath : null;
 
         const repoCosts: RepositoryInfo[] = [];
@@ -417,7 +417,7 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; font-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link href="${codiconsUri}" rel="stylesheet" />
-                <title>Git Commit Genie</title>
+                <title>Git Commit GenieX</title>
             </head>
             <body>
                 <div id="root"></div>

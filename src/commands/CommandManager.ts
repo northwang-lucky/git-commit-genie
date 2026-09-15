@@ -52,21 +52,21 @@ export class CommandManager {
     private registerGlobalCommands(): void {
         // Template selection / creation
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.selectTemplate', async () => {
+            vscode.commands.registerCommand('git-commit-geniex.selectTemplate', async () => {
                 await this.serviceRegistry.getTemplateService().openQuickPicker();
             })
         );
 
         // Toggle chain prompting mode
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.toggleChainMode', async () => {
+            vscode.commands.registerCommand('git-commit-geniex.toggleChainMode', async () => {
                 const currentCfg = vscode.workspace.getConfiguration();
                 // Prefer new key if present or previously set
-                let current = currentCfg.get<boolean>('gitCommitGenie.chain.enabled');
+                let current = currentCfg.get<boolean>('gitCommitGeniex.chain.enabled');
                 if (typeof current !== 'boolean') {
-                    current = currentCfg.get<boolean>('gitCommitGenie.useChainPrompts', false);
+                    current = currentCfg.get<boolean>('gitCommitGeniex.useChainPrompts', false);
                 }
-                await currentCfg.update('gitCommitGenie.chain.enabled', !current, vscode.ConfigurationTarget.Global);
+                await currentCfg.update('gitCommitGeniex.chain.enabled', !current, vscode.ConfigurationTarget.Global);
 
                 this.statusBarManager.updateStatusBar();
                 vscode.window.showInformationMessage(
@@ -80,13 +80,13 @@ export class CommandManager {
 
         // Status bar update command (for configuration changes)
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.updateStatusBar', () => {
+            vscode.commands.registerCommand('git-commit-geniex.updateStatusBar', () => {
                 this.statusBarManager.updateStatusBar();
             })
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.configureRagEmbeddingApiKey', async () => {
+            vscode.commands.registerCommand('git-commit-geniex.configureRagEmbeddingApiKey', async () => {
                 const apiKey = await vscode.window.showInputBox({
                     title: vscode.l10n.t(I18N.rag.enterEmbeddingKeyTitle),
                     prompt: vscode.l10n.t(I18N.rag.enterEmbeddingKeyPrompt),
@@ -104,14 +104,14 @@ export class CommandManager {
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.clearRagEmbeddingApiKey', async () => {
+            vscode.commands.registerCommand('git-commit-geniex.clearRagEmbeddingApiKey', async () => {
                 await this.serviceRegistry.getRagRuntimeService().clearEmbeddingApiKey();
                 vscode.window.showInformationMessage(vscode.l10n.t(I18N.rag.embeddingKeyCleared));
             })
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.startRagIndexing', async (arg?: any) => {
+            vscode.commands.registerCommand('git-commit-geniex.startRagIndexing', async (arg?: any) => {
                 try {
                     const repo = await this.resolveRagTargetRepository(arg, false);
                     if (!repo) {
@@ -160,7 +160,7 @@ export class CommandManager {
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.repairRagEmbeddings', async (arg?: any) => {
+            vscode.commands.registerCommand('git-commit-geniex.repairRagEmbeddings', async (arg?: any) => {
                 const repo = await this.resolveRagTargetRepository(arg, false);
                 if (!repo) {
                     return;
@@ -175,7 +175,7 @@ export class CommandManager {
         );
 
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.cancelRagIndexing', async (arg?: any) => {
+            vscode.commands.registerCommand('git-commit-geniex.cancelRagIndexing', async (arg?: any) => {
                 const repo = await this.resolveRagTargetRepository(arg, true);
                 if (!repo) {
                     vscode.window.showInformationMessage(vscode.l10n.t(I18N.rag.indexingNothingToCancel));

@@ -1,6 +1,6 @@
 {
-	"Git Commit Genie: {0} / {1}": "Git Commit Genie: {0} / {1}",
-	"Git Commit Genie: {0} — click to configure models": "Git Commit Genie: {0} — 點擊以設定模型",
+	"Git Commit GenieX: {0} / {1}": "Git Commit GenieX: {0} / {1}",
+	"Git Commit GenieX: {0} — click to configure models": "Git Commit GenieX: {0} — 點擊以設定模型",
 	"Select Model": "選擇模型",
 	" · Chain": " · Thinking",
 	"Select a provider…": "選擇一個供應商…",
@@ -44,7 +44,7 @@
 	"Max Parallel Chains": "最大並行鏈數",
 	"Repository Analysis Model: {0} / {1}": "倉庫分析模型：{0} / {1}",
 	"No workspace folder is open.": "沒有開啟的工作區資料夾。",
-	"Git Commit Genie": "Git Commit Genie",
+	"Git Commit GenieX": "Git Commit GenieX",
 	"$(gear) Manage Models": "$(gear) 管理模型",
 	"$(stop-circle) Cancel Analysis": "$(stop-circle) 取消分析",
 	"$(refresh) Refresh Analysis": "$(refresh) 重新整理倉庫分析",

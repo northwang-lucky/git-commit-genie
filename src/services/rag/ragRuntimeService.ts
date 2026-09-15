@@ -128,15 +128,15 @@ export class RagRuntimeService {
     ) { }
 
     public async initialize(): Promise<void> {
-        void vscode.commands.executeCommand('setContext', 'gitCommitGenie.ragIndexing', false);
+        void vscode.commands.executeCommand('setContext', 'gitCommitGeniex.ragIndexing', false);
         this.context.subscriptions.push(
             vscode.workspace.onDidChangeConfiguration(async (e) => {
                 if (
-                    e.affectsConfiguration('gitCommitGenie.rag.enabled') ||
-                    e.affectsConfiguration('gitCommitGenie.rag.embedding.baseUrl') ||
-                    e.affectsConfiguration('gitCommitGenie.rag.embedding.model') ||
-                    e.affectsConfiguration('gitCommitGenie.rag.embedding.dimensions') ||
-                    e.affectsConfiguration('gitCommitGenie.rag.embedding.batchSize')
+                    e.affectsConfiguration('gitCommitGeniex.rag.enabled') ||
+                    e.affectsConfiguration('gitCommitGeniex.rag.embedding.baseUrl') ||
+                    e.affectsConfiguration('gitCommitGeniex.rag.embedding.model') ||
+                    e.affectsConfiguration('gitCommitGeniex.rag.embedding.dimensions') ||
+                    e.affectsConfiguration('gitCommitGeniex.rag.embedding.batchSize')
                 ) {
                     await this.refreshFromSettings();
                 }
@@ -219,7 +219,7 @@ export class RagRuntimeService {
 
         const request: Record<string, unknown> = {
             model: cfg.model,
-            input: ['git-commit-genie-rag-healthcheck'],
+            input: ['git-commit-geniex-rag-healthcheck'],
         };
         if (cfg.dimensions > 0) {
             request.dimensions = cfg.dimensions;
@@ -295,7 +295,7 @@ export class RagRuntimeService {
         };
         this.repositoryStatuses.set(repoPath, status);
         this._onDidRepositoryStatusChange.fire({ repoPath, status });
-        void vscode.commands.executeCommand('setContext', 'gitCommitGenie.ragIndexing', this.hasActiveIndexingWork());
+        void vscode.commands.executeCommand('setContext', 'gitCommitGeniex.ragIndexing', this.hasActiveIndexingWork());
     }
 
     public async ensureAllRepositoriesIndexed(reason: string = 'manual'): Promise<void> {
@@ -328,7 +328,7 @@ export class RagRuntimeService {
             throw new Error(`Failed to resolve git dir for ${repo.rootUri.fsPath}`);
         }
 
-        const storageDir = path.join(gitDir, 'git-commit-genie', 'rag');
+        const storageDir = path.join(gitDir, 'git-commit-geniex', 'rag');
         await fs.mkdir(storageDir, { recursive: true });
 
         const fingerprint = this.buildFingerprint(cfg);
@@ -654,7 +654,7 @@ export class RagRuntimeService {
 
     private async getStorageDirForRepository(repo: Repository): Promise<string | null> {
         const gitDir = await this.repoService.getRepositoryGitDir(repo);
-        return gitDir ? path.join(gitDir, 'git-commit-genie', 'rag') : null;
+        return gitDir ? path.join(gitDir, 'git-commit-geniex', 'rag') : null;
     }
 
     private async requireStorageDir(repo: Repository): Promise<string> {

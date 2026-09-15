@@ -28,7 +28,7 @@ export class CostTrackingService {
 
         try {
 
-            const costKey = `gitCommitGenie.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
+            const costKey = `gitCommitGeniex.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
 
             // Get existing cost and add new cost
             const existingCost = this.context.globalState.get<number>(costKey, 0);
@@ -54,7 +54,7 @@ export class CostTrackingService {
         }
 
         try {
-            const costKey = `gitCommitGenie.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
+            const costKey = `gitCommitGeniex.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
 
             return this.context.globalState.get<number>(costKey, 0);
         } catch (error) {
@@ -73,7 +73,7 @@ export class CostTrackingService {
 
         try {
 
-            const costKey = `gitCommitGenie.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
+            const costKey = `gitCommitGeniex.repositoryCost.${Buffer.from(repoPath).toString('base64')}`;
 
             await this.context.globalState.update(costKey, 0);
             // Notify listeners so UI can refresh immediately
@@ -95,12 +95,12 @@ export class CostTrackingService {
 
         try {
             const keys = this.context.globalState.keys();
-            const costKeys = keys.filter(key => key.startsWith('gitCommitGenie.repositoryCost.'));
+            const costKeys = keys.filter(key => key.startsWith('gitCommitGeniex.repositoryCost.'));
 
             for (const key of costKeys) {
                 const cost = this.context.globalState.get<number>(key, 0);
                 // Decode the repository path from base64
-                const base64Path = key.replace('gitCommitGenie.repositoryCost.', '');
+                const base64Path = key.replace('gitCommitGeniex.repositoryCost.', '');
                 const repositoryPath = Buffer.from(base64Path, 'base64').toString('utf-8');
                 costs.set(repositoryPath, cost);
             }

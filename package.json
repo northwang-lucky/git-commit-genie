@@ -1,7 +1,7 @@
 {
-  "name": "git-commit-genie",
+  "name": "git-commit-geniex",
   "displayName": "%displayName%",
-  "publisher": "Lune-99",
+  "publisher": "northwang-lucky",
   "description": "%description%",
   "version": "3.2.3",
   "license": "MIT",
@@ -18,6 +18,7 @@
     "git",
     "commit",
     "ai",
+    "geniex",
     "llm",
     "automation",
     "gpt",
@@ -111,9 +112,9 @@
       }
     },
     "configuration": {
-      "title": "Git Commit Genie",
+      "title": "Git Commit GenieX",
       "properties": {
-        "gitCommitGenie.autoStageAllForDiff": {
+        "gitCommitGeniex.autoStageAllForDiff": {
           "order": 1,
           "type": "boolean",
           "default": false,
@@ -122,7 +123,7 @@
             "experimental"
           ]
         },
-        "gitCommitGenie.chain.enabled": {
+        "gitCommitGeniex.chain.enabled": {
           "order": 3,
           "type": "boolean",
           "default": true,
@@ -131,21 +132,21 @@
             "experimental"
           ]
         },
-        "gitCommitGenie.chain.maxParallel": {
+        "gitCommitGeniex.chain.maxParallel": {
           "order": 4,
           "type": "number",
           "default": 2,
           "minimum": 1,
           "markdownDescription": "%config.chain.maxParallel.desc%"
         },
-        "gitCommitGenie.llm.maxRetries": {
+        "gitCommitGeniex.llm.maxRetries": {
           "order": 5,
           "type": "number",
           "default": 2,
           "minimum": 1,
           "markdownDescription": "%config.llm.maxRetries.desc%"
         },
-        "gitCommitGenie.llm.temperature": {
+        "gitCommitGeniex.llm.temperature": {
           "order": 6,
           "type": "number",
           "default": 1,
@@ -153,19 +154,19 @@
           "maximum": 2,
           "markdownDescription": "%config.llm.temperature.desc%"
         },
-        "gitCommitGenie.local.baseUrl": {
+        "gitCommitGeniex.local.baseUrl": {
           "order": 7,
           "type": "string",
           "default": "",
           "markdownDescription": "%config.local.baseUrl.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.enabled": {
+        "gitCommitGeniex.repositoryAnalysis.enabled": {
           "order": 11,
           "type": "boolean",
           "default": true,
           "markdownDescription": "%config.repositoryAnalysis.enabled.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.excludePatterns": {
+        "gitCommitGeniex.repositoryAnalysis.excludePatterns": {
           "order": 13,
           "type": "array",
           "items": {
@@ -174,7 +175,7 @@
           "default": [],
           "markdownDescription": "%config.repositoryAnalysis.excludePatterns.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.updateThreshold": {
+        "gitCommitGeniex.repositoryAnalysis.updateThreshold": {
           "order": 14,
           "type": "number",
           "default": 10,
@@ -182,13 +183,13 @@
           "maximum": 32,
           "markdownDescription": "%config.repositoryAnalysis.updateThreshold.desc%"
         },
-        "gitCommitGenie.ui.stageNotifications.enabled": {
+        "gitCommitGeniex.ui.stageNotifications.enabled": {
           "order": 10,
           "type": "boolean",
           "default": true,
           "markdownDescription": "%config.ui.stageNotifications.enabled.desc%"
         },
-        "gitCommitGenie.rag.enabled": {
+        "gitCommitGeniex.rag.enabled": {
           "order": 19,
           "type": "boolean",
           "default": false,
@@ -197,7 +198,7 @@
           ],
           "markdownDescription": "%config.rag.enabled.desc%"
         },
-        "gitCommitGenie.rag.embedding.baseUrl": {
+        "gitCommitGeniex.rag.embedding.baseUrl": {
           "order": 20,
           "type": "string",
           "default": "",
@@ -206,7 +207,7 @@
           ],
           "markdownDescription": "%config.rag.embedding.baseUrl.desc%"
         },
-        "gitCommitGenie.rag.embedding.model": {
+        "gitCommitGeniex.rag.embedding.model": {
           "order": 21,
           "type": "string",
           "default": "",
@@ -215,7 +216,7 @@
           ],
           "markdownDescription": "%config.rag.embedding.model.desc%"
         },
-        "gitCommitGenie.rag.embedding.dimensions": {
+        "gitCommitGeniex.rag.embedding.dimensions": {
           "order": 22,
           "type": "number",
           "default": 0,
@@ -225,7 +226,7 @@
           ],
           "markdownDescription": "%config.rag.embedding.dimensions.desc%"
         },
-        "gitCommitGenie.rag.embedding.batchSize": {
+        "gitCommitGeniex.rag.embedding.batchSize": {
           "order": 23,
           "type": "number",
           "default": 10,
@@ -236,35 +237,35 @@
           ],
           "markdownDescription": "%config.rag.embedding.batchSize.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.MaxCount": {
+        "gitCommitGeniex.repositoryAnalysis.MaxCount": {
           "order": 15,
           "type": "number",
           "default": -1,
           "minimum": -1,
           "markdownDescription": "%config.repositoryAnalysis.MaxCount.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.toolResult.maxContentChars": {
+        "gitCommitGeniex.repositoryAnalysis.toolResult.maxContentChars": {
           "order": 16,
           "type": "number",
           "default": 40000,
           "minimum": 1000,
           "markdownDescription": "%config.repositoryAnalysis.toolResult.maxContentChars.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.toolResult.maxListLines": {
+        "gitCommitGeniex.repositoryAnalysis.toolResult.maxListLines": {
           "order": 17,
           "type": "number",
           "default": 3000,
           "minimum": 10,
           "markdownDescription": "%config.repositoryAnalysis.toolResult.maxListLines.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.toolResult.maxSnippetChars": {
+        "gitCommitGeniex.repositoryAnalysis.toolResult.maxSnippetChars": {
           "order": 18,
           "type": "number",
           "default": 8000,
           "minimum": 100,
           "markdownDescription": "%config.repositoryAnalysis.toolResult.maxSnippetChars.desc%"
         },
-        "gitCommitGenie.repositoryAnalysis.model": {
+        "gitCommitGeniex.repositoryAnalysis.model": {
           "order": 12,
           "type": "string",
           "default": "general",
@@ -412,7 +413,7 @@
           ],
           "markdownDescription": "%config.repositoryAnalysis.model.desc%"
         },
-        "gitCommitGenie.commitLanguage": {
+        "gitCommitGeniex.commitLanguage": {
           "order": 2,
           "type": "string",
           "default": "auto",
@@ -446,7 +447,7 @@
           ],
           "markdownDescription": "%config.commitLanguage.desc%"
         },
-        "gitCommitGenie.typingAnimationSpeed": {
+        "gitCommitGeniex.typingAnimationSpeed": {
           "order": 8,
           "type": "number",
           "default": 15,
@@ -454,7 +455,7 @@
           "maximum": 100,
           "markdownDescription": "%config.typingAnimationSpeed.desc%"
         },
-        "gitCommitGenie.showUsageCost": {
+        "gitCommitGeniex.showUsageCost": {
           "order": 9,
           "type": "boolean",
           "default": true,
@@ -466,110 +467,110 @@
       "scm": [
         {
           "type": "webview",
-          "id": "gitCommitGenie.panel",
+          "id": "gitCommitGeniex.panel",
           "icon": "$(genie-base)",
-          "name": "Git Commit Genie"
+          "name": "Git Commit GenieX"
         }
       ]
     },
     "commands": [
       {
-        "command": "git-commit-genie.generateCommitMessage",
+        "command": "git-commit-geniex.generateCommitMessage",
         "title": "%command.generate%",
         "icon": "$(genie-base)"
       },
       {
-        "command": "git-commit-genie.cancelRepositoryAnalysis",
+        "command": "git-commit-geniex.cancelRepositoryAnalysis",
         "title": "%command.cancelRepositoryAnalysis%",
         "category": "%category.title%",
         "icon": "$(stop)",
-        "enablement": "gitCommitGenie.repositoryAnalysisEnabled == true && gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning == true"
+        "enablement": "gitCommitGeniex.repositoryAnalysisEnabled == true && gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning == true"
       },
       {
-        "command": "git-commit-genie.cancelGeneration",
+        "command": "git-commit-geniex.cancelGeneration",
         "title": "%command.cancel%",
         "icon": "$(debug-stop)",
         "category": "%category.title%"
       },
       {
-        "command": "git-commit-genie.manageModels",
+        "command": "git-commit-geniex.manageModels",
         "title": "%command.manageModels%",
         "category": "%category.title%",
         "icon": "$(gear)"
       },
       {
-        "command": "git-commit-genie.configureRagEmbeddingApiKey",
+        "command": "git-commit-geniex.configureRagEmbeddingApiKey",
         "title": "%command.configureRagEmbeddingApiKey%",
         "category": "%category.title%",
         "icon": "$(key)"
       },
       {
-        "command": "git-commit-genie.clearRagEmbeddingApiKey",
+        "command": "git-commit-geniex.clearRagEmbeddingApiKey",
         "title": "%command.clearRagEmbeddingApiKey%",
         "category": "%category.title%",
         "icon": "$(trash)"
       },
       {
-        "command": "git-commit-genie.startRagIndexing",
+        "command": "git-commit-geniex.startRagIndexing",
         "title": "%command.startRagIndexing%",
         "category": "%category.title%",
         "icon": "$(play)",
-        "enablement": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.ragEnabled == true"
+        "enablement": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.ragEnabled == true"
       },
       {
-        "command": "git-commit-genie.cancelRagIndexing",
+        "command": "git-commit-geniex.cancelRagIndexing",
         "title": "%command.cancelRagIndexing%",
         "category": "%category.title%",
         "icon": "$(debug-stop)",
-        "enablement": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.ragEnabled == true && gitCommitGenie.ragIndexing == true"
+        "enablement": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.ragEnabled == true && gitCommitGeniex.ragIndexing == true"
       },
       {
-        "command": "git-commit-genie.toggleChainMode",
+        "command": "git-commit-geniex.toggleChainMode",
         "title": "%command.toggleChain%",
         "category": "%category.title%",
         "icon": "$(circuit-board)"
       },
       {
-        "command": "git-commit-genie.selectTemplate",
+        "command": "git-commit-geniex.selectTemplate",
         "title": "%command.selectTemplate%",
         "category": "%category.title%",
         "icon": "$(file-text)"
       },
       {
-        "command": "git-commit-genie.viewRepositoryAnalysis",
+        "command": "git-commit-geniex.viewRepositoryAnalysis",
         "title": "%command.viewRepositoryAnalysis%",
         "category": "%category.title%",
         "icon": "$(search)",
-        "enablement": "gitCommitGenie.repositoryAnalysisEnabled == true && gitCommitGenie.hasGitRepo == true"
+        "enablement": "gitCommitGeniex.repositoryAnalysisEnabled == true && gitCommitGeniex.hasGitRepo == true"
       },
       {
-        "command": "git-commit-genie.refreshRepositoryAnalysis",
+        "command": "git-commit-geniex.refreshRepositoryAnalysis",
         "title": "%command.refreshRepositoryAnalysis%",
         "category": "%category.title%",
         "icon": "$(refresh)",
-        "enablement": "gitCommitGenie.repositoryAnalysisEnabled == true && gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning != true"
+        "enablement": "gitCommitGeniex.repositoryAnalysisEnabled == true && gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning != true"
       },
       {
-        "command": "git-commit-genie.clearRepositoryAnalysisCache",
+        "command": "git-commit-geniex.clearRepositoryAnalysisCache",
         "title": "%command.clearRepositoryAnalysisCache%",
         "category": "%category.title%",
         "icon": "$(trash)",
-        "enablement": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning != true"
+        "enablement": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning != true"
       },
       {
-        "command": "git-commit-genie.genieMenu",
-        "title": "Git Commit Genie: Menu",
+        "command": "git-commit-geniex.genieMenu",
+        "title": "Git Commit GenieX: Menu",
         "category": "%category.title%",
         "icon": "$(menu)"
       },
       {
-        "command": "git-commit-genie.showRepositoryCost",
+        "command": "git-commit-geniex.showRepositoryCost",
         "title": "%command.showRepositoryCost%",
         "category": "%category.title%",
         "icon": "$(info)"
       },
       {
-        "command": "git-commit-genie.resetRepositoryCost",
+        "command": "git-commit-geniex.resetRepositoryCost",
         "title": "%command.resetRepositoryCost%",
         "category": "%category.title%",
         "icon": "$(trash)"
@@ -578,40 +579,40 @@
     "menus": {
       "scm/title": [
         {
-          "command": "git-commit-genie.generateCommitMessage",
-          "when": "scmProvider == 'git' && gitCommitGenie.generating != true",
+          "command": "git-commit-geniex.generateCommitMessage",
+          "when": "scmProvider == 'git' && gitCommitGeniex.generating != true",
           "group": "navigation"
         },
         {
-          "command": "git-commit-genie.cancelGeneration",
-          "when": "scmProvider == 'git' && gitCommitGenie.generating == true",
+          "command": "git-commit-geniex.cancelGeneration",
+          "when": "scmProvider == 'git' && gitCommitGeniex.generating == true",
           "group": "navigation"
         }
       ],
       "commandPalette": [
         {
-          "command": "git-commit-genie.cancelRepositoryAnalysis",
+          "command": "git-commit-geniex.cancelRepositoryAnalysis",
           "when": "false"
         },
         {
-          "command": "git-commit-genie.refreshRepositoryAnalysis",
-          "when": "gitCommitGenie.repositoryAnalysisEnabled == true && gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning != true"
+          "command": "git-commit-geniex.refreshRepositoryAnalysis",
+          "when": "gitCommitGeniex.repositoryAnalysisEnabled == true && gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning != true"
         },
         {
-          "command": "git-commit-genie.clearRepositoryAnalysisCache",
-          "when": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning != true"
+          "command": "git-commit-geniex.clearRepositoryAnalysisCache",
+          "when": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning != true"
         },
         {
-          "command": "git-commit-genie.startRagIndexing",
-          "when": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.ragEnabled == true"
+          "command": "git-commit-geniex.startRagIndexing",
+          "when": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.ragEnabled == true"
         },
         {
-          "command": "git-commit-genie.cancelRagIndexing",
-          "when": "gitCommitGenie.hasGitRepo == true && gitCommitGenie.ragEnabled == true && gitCommitGenie.ragIndexing == true"
+          "command": "git-commit-geniex.cancelRagIndexing",
+          "when": "gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.ragEnabled == true && gitCommitGeniex.ragIndexing == true"
         },
         {
-          "command": "git-commit-genie.cancelRepositoryAnalysis",
-          "when": "gitCommitGenie.repositoryAnalysisEnabled == true && gitCommitGenie.hasGitRepo == true && gitCommitGenie.analysisRunning == true"
+          "command": "git-commit-geniex.cancelRepositoryAnalysis",
+          "when": "gitCommitGeniex.repositoryAnalysisEnabled == true && gitCommitGeniex.hasGitRepo == true && gitCommitGeniex.analysisRunning == true"
         }
       ]
     }
@@ -666,10 +667,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nouvelle-Lune/git-commit-genie.git"
+    "url": "https://github.com/northwang-lucky/git-commit-genie.git"
   },
-  "homepage": "https://github.com/Nouvelle-Lune/git-commit-genie",
+  "homepage": "https://github.com/northwang-lucky/git-commit-genie",
   "bugs": {
-    "url": "https://github.com/Nouvelle-Lune/git-commit-genie/issues"
+    "url": "https://github.com/northwang-lucky/git-commit-genie/issues"
   }
 }

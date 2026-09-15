@@ -5,7 +5,7 @@ import { IRepositoryAnalysisService } from '../../analysis/analysisTypes';
 import { OpenAIChatCompletionsService } from './openaiChatCompletionsService';
 
 const LOCAL_DEFAULT_BASE_URL = 'http://127.0.0.1:11434/v1';
-const LOCAL_MODELS_CACHE_KEY = 'gitCommitGenie.localModelsCache';
+const LOCAL_MODELS_CACHE_KEY = 'gitCommitGeniex.localModelsCache';
 
 /**
  * Local OpenAI-compatible provider implementation.
@@ -14,8 +14,8 @@ export class LocalService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'Local',
-            modelStateKey: 'gitCommitGenie.localModel',
-            secretKey: 'gitCommitGenie.secret.localApiKey',
+            modelStateKey: 'gitCommitGeniex.localModel',
+            secretKey: 'gitCommitGeniex.secret.localApiKey',
             baseURL: LOCAL_DEFAULT_BASE_URL
         });
     }
@@ -58,7 +58,7 @@ export class LocalService extends OpenAIChatCompletionsService {
     }
 
     private getConfiguredBaseUrl(): string {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         const baseUrl = (cfg.get<string>('local.baseUrl', LOCAL_DEFAULT_BASE_URL) || '').trim();
 
         if (!baseUrl) {

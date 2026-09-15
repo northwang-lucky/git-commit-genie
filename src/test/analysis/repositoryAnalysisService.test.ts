@@ -59,7 +59,7 @@ function createStubLLMService() {
 // ============================================================================
 describe('RepositoryAnalysisService — Markdown title normalization', () => {
     it('should write exactly one title when the summary already starts with the file title', async () => {
-        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-genie-analysis-'));
+        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-geniex-analysis-'));
         const service = new RepositoryAnalysisService(
             createStubContext(),
             createStubLLMService(),
@@ -90,7 +90,7 @@ describe('RepositoryAnalysisService — Markdown title normalization', () => {
     });
 
     it('should remove repeated leading file titles while preserving headings in the body', async () => {
-        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-genie-analysis-'));
+        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-geniex-analysis-'));
         const service = new RepositoryAnalysisService(
             createStubContext(),
             createStubLLMService(),
@@ -128,7 +128,7 @@ describe('RepositoryAnalysisService — Markdown title normalization', () => {
     });
 
     it('should store only the Markdown body when syncing the generated file', async () => {
-        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-genie-analysis-'));
+        const repositoryPath = fs.mkdtempSync(path.join(os.tmpdir(), 'git-commit-geniex-analysis-'));
         const context = createStubContext();
         const service = new RepositoryAnalysisService(
             context,

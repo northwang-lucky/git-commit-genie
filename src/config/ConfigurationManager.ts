@@ -6,8 +6,8 @@ export class ConfigurationManager {
 
     async initialize(): Promise<void> {
         // Initialize logger based on configuration
-        const outputChannel = vscode.window.createOutputChannel('Git Commit Genie');
-        const config = vscode.workspace.getConfiguration('gitCommitGenie');
+        const outputChannel = vscode.window.createOutputChannel('Git Commit GenieX');
+        const config = vscode.workspace.getConfiguration('gitCommitGeniex');
         const logLevel = config.get<string>('logLevel', 'info');
         const level = this.getLogLevel(logLevel);
         logger.initialize(outputChannel, level, this.context);
@@ -30,9 +30,9 @@ export class ConfigurationManager {
     readChainEnabled(): boolean {
         const cfg = vscode.workspace.getConfiguration();
         // New key
-        const newVal = cfg.get<boolean>('gitCommitGenie.chain.enabled');
+        const newVal = cfg.get<boolean>('gitCommitGeniex.chain.enabled');
         if (typeof newVal === 'boolean') {
-            this.context.globalState.update('gitCommitGenie.useChainPrompts', newVal);
+            this.context.globalState.update('gitCommitGeniex.useChainPrompts', newVal);
             return newVal;
         } else {
             // newVal is undefined
@@ -42,7 +42,7 @@ export class ConfigurationManager {
 
     isRepoAnalysisEnabled(): boolean {
         try {
-            return vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis').get<boolean>('enabled', true);
+            return vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis').get<boolean>('enabled', true);
         } catch {
             return true;
         }
@@ -50,7 +50,7 @@ export class ConfigurationManager {
 
     isRagEnabled(): boolean {
         try {
-            return vscode.workspace.getConfiguration('gitCommitGenie.rag').get<boolean>('enabled', false);
+            return vscode.workspace.getConfiguration('gitCommitGeniex.rag').get<boolean>('enabled', false);
         } catch {
             return false;
         }
@@ -66,20 +66,20 @@ export class ConfigurationManager {
     }
 
     private async updateContextKeys(): Promise<void> {
-        await vscode.commands.executeCommand('setContext', 'gitCommitGenie.repositoryAnalysisEnabled', this.isRepoAnalysisEnabled());
-        await vscode.commands.executeCommand('setContext', 'gitCommitGenie.ragEnabled', this.isRagEnabled());
+        await vscode.commands.executeCommand('setContext', 'gitCommitGeniex.repositoryAnalysisEnabled', this.isRepoAnalysisEnabled());
+        await vscode.commands.executeCommand('setContext', 'gitCommitGeniex.ragEnabled', this.isRagEnabled());
     }
 
     private async onConfigurationChanged(e: vscode.ConfigurationChangeEvent): Promise<void> {
-        const chainChanged = e.affectsConfiguration('gitCommitGenie.useChainPrompts') ||
-            e.affectsConfiguration('gitCommitGenie.chain.enabled');
-        const repoAnalysisChanged = e.affectsConfiguration('gitCommitGenie.repositoryAnalysis.enabled');
-        const ragChanged = e.affectsConfiguration('gitCommitGenie.rag.enabled');
-        const logLevelChanged = e.affectsConfiguration('gitCommitGenie.logLevel');
+        const chainChanged = e.affectsConfiguration('gitCommitGeniex.useChainPrompts') ||
+            e.affectsConfiguration('gitCommitGeniex.chain.enabled');
+        const repoAnalysisChanged = e.affectsConfiguration('gitCommitGeniex.repositoryAnalysis.enabled');
+        const ragChanged = e.affectsConfiguration('gitCommitGeniex.rag.enabled');
+        const logLevelChanged = e.affectsConfiguration('gitCommitGeniex.logLevel');
 
         if (logLevelChanged) {
             try {
-                const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+                const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
                 const logLevel = (cfg.get<string>('logLevel', 'info') || 'info').toLowerCase();
                 const level = this.getLogLevel(logLevel);
                 logger.setLogLevel(level);
@@ -93,7 +93,7 @@ export class ConfigurationManager {
 
         // Notify other components about config changes
         if (chainChanged || repoAnalysisChanged || ragChanged) {
-            vscode.commands.executeCommand('git-commit-genie.updateStatusBar');
+            vscode.commands.executeCommand('git-commit-geniex.updateStatusBar');
         }
     }
 }

@@ -15,8 +15,8 @@ export class OpenRouterService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'OpenRouter',
-            modelStateKey: 'gitCommitGenie.openrouterModel',
-            secretKey: 'gitCommitGenie.secret.openrouterApiKey',
+            modelStateKey: 'gitCommitGeniex.openrouterModel',
+            secretKey: 'gitCommitGeniex.secret.openrouterApiKey',
             baseURL: OPENROUTER_API_URL
         });
     }
@@ -26,8 +26,8 @@ export class OpenRouterService extends OpenAIChatCompletionsService {
             apiKey,
             baseURL: baseURL || OPENROUTER_API_URL,
             defaultHeaders: {
-                'HTTP-Referer': 'https://github.com/Nouvelle-Lune/git-commit-genie',
-                'X-Title': 'Git Commit Genie'
+                'HTTP-Referer': 'https://github.com/Nouvelle-Lune/git-commit-geniex',
+                'X-Title': 'Git Commit GenieX'
             }
         });
     }

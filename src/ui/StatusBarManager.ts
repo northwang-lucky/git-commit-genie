@@ -19,7 +19,7 @@ import {
 } from './StatusBarTypes';
 
 /**
- * Manages the status bar item for Git Commit Genie
+ * Manages the status bar item for Git Commit GenieX
  */
 export class StatusBarManager {
     private statusBarItem!: vscode.StatusBarItem;
@@ -97,7 +97,7 @@ export class StatusBarManager {
             this.analysisState.runningRepoLabel = null;
         }
 
-        vscode.commands.executeCommand('setContext', 'gitCommitGenie.analysisRunning', running);
+        vscode.commands.executeCommand('setContext', 'gitCommitGeniex.analysisRunning', running);
         this.updateStatusBar();
         try { this._onAnalysisRunningChanged.fire({ running, label: this.analysisState.runningRepoLabel }); } catch { /* ignore */ }
     }
@@ -123,7 +123,7 @@ export class StatusBarManager {
             vscode.StatusBarAlignment.Right,
             -10000
         );
-        this.statusBarItem.command = 'git-commit-genie.genieMenu';
+        this.statusBarItem.command = 'git-commit-geniex.genieMenu';
         this.context.subscriptions.push(this.statusBarItem);
     }
 
@@ -150,7 +150,7 @@ export class StatusBarManager {
 
     private registerSecretListeners(): void {
         const disposable = this.context.secrets.onDidChange(async (e) => {
-            if (!e?.key?.startsWith('gitCommitGenie.secret.')) {
+            if (!e?.key?.startsWith('gitCommitGeniex.secret.')) {
                 return;
             }
 
@@ -171,7 +171,7 @@ export class StatusBarManager {
 
     private registerConfigListeners(): void {
         const disposable = vscode.workspace.onDidChangeConfiguration((e) => {
-            if (e.affectsConfiguration('gitCommitGenie.repositoryAnalysis.model')) {
+            if (e.affectsConfiguration('gitCommitGeniex.repositoryAnalysis.model')) {
                 void this.validateAnalysisModelApiKey(true);
                 void this.refreshAnalysisState();
             }
@@ -233,7 +233,7 @@ export class StatusBarManager {
 
         // For Qwen, if current region's key doesn't exist, check the other region
         if (!key && p === 'qwen') {
-            const currentRegion = this.context.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+            const currentRegion = this.context.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
             const otherRegion = currentRegion === 'china' ? 'intl' : 'china';
             const otherSecretKey = getProviderSecretKey('qwen', otherRegion);
             const otherKey = await this.context.secrets.get(otherSecretKey);
@@ -264,11 +264,11 @@ export class StatusBarManager {
             repoLabel
         };
 
-        vscode.commands.executeCommand('setContext', 'gitCommitGenie.hasGitRepo', hasRepo);
+        vscode.commands.executeCommand('setContext', 'gitCommitGeniex.hasGitRepo', hasRepo);
     }
 
     private async refreshAnalysisState(): Promise<void> {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
         const selected = (cfg.get<string>('model', 'general') || 'general').trim();
         const enabled = this.configManager.isRepoAnalysisEnabled();
 
@@ -293,7 +293,7 @@ export class StatusBarManager {
 
         // For Qwen, if current region's key doesn't exist, check the other region
         if (!key && provider === 'qwen') {
-            const currentRegion = this.context.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+            const currentRegion = this.context.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
             const otherRegion = currentRegion === 'china' ? 'intl' : 'china';
             const otherSecretKey = getProviderSecretKey('qwen', otherRegion);
             const otherKey = await this.context.secrets.get(otherSecretKey);
@@ -419,7 +419,7 @@ export class StatusBarManager {
 
         if (hasApiKey && model.trim()) {
             if (provider.toLowerCase() === 'local') {
-                return `Git Commit Genie: ${providerLabel}`;
+                return `Git Commit GenieX: ${providerLabel}`;
             }
             return vscode.l10n.t(I18N.statusBar.tooltipConfigured, providerLabel, model);
         }
@@ -477,7 +477,7 @@ export class StatusBarManager {
     }
 
     private getStatusBarCommand(): string {
-        return this.gitState.hasRepo ? 'git-commit-genie.genieMenu' : 'git.init';
+        return this.gitState.hasRepo ? 'git-commit-geniex.genieMenu' : 'git.init';
     }
 
     // ========================================
@@ -546,7 +546,7 @@ export class StatusBarManager {
 
     private async validateAnalysisModelApiKey(showPrompt: boolean): Promise<void> {
         try {
-            const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+            const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
             const selected = (cfg.get<string>('model', 'general') || 'general').trim();
 
             let provider: string | null = null;
@@ -601,7 +601,7 @@ export class StatusBarManager {
                     this.updateStatusBar();
                 }
             } else if (choice === vscode.l10n.t(I18N.actions.manageModels)) {
-                await vscode.commands.executeCommand('git-commit-genie.manageModels');
+                await vscode.commands.executeCommand('git-commit-geniex.manageModels');
             }
         } catch {
             // Ignore validation errors
@@ -618,7 +618,7 @@ export class StatusBarManager {
         // For Qwen, get the region-specific secret key
         // The actual region switching logic is handled in QwenService.refreshFromSettings()
         if (normalizedProvider === 'qwen') {
-            const region = this.context.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+            const region = this.context.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
             return getProviderSecretKey('qwen', region);
         }
 

@@ -27,7 +27,7 @@ import {
 } from './schemas/anthropicSchemas';
 import { commitMessageSchema } from './schemas/common';
 
-const SECRET_ANTHROPIC_API_KEY = 'gitCommitGenie.secret.anthropicApiKey';
+const SECRET_ANTHROPIC_API_KEY = 'gitCommitGeniex.secret.anthropicApiKey';
 
 /**
  * Map dated Anthropic model snapshot IDs to undated aliases.
@@ -125,10 +125,10 @@ export class AnthropicService extends BaseLLMService {
      * Get the current model configuration
      */
     protected getCurrentModel(): string {
-        const stored = this.context.globalState.get<string>('gitCommitGenie.anthropicModel', '') || '';
+        const stored = this.context.globalState.get<string>('gitCommitGeniex.anthropicModel', '') || '';
         const normalized = ANTHROPIC_DATED_TO_UNDATED_MAP[stored];
         if (normalized) {
-            this.context.globalState.update('gitCommitGenie.anthropicModel', normalized);
+            this.context.globalState.update('gitCommitGeniex.anthropicModel', normalized);
             return normalized;
         }
         return stored;
@@ -138,7 +138,7 @@ export class AnthropicService extends BaseLLMService {
      * Get Anthropic-specific configuration
      */
     private getConfig() {
-        return this.utils.getProviderConfig('gitCommitGenie', 'anthropicModel');
+        return this.utils.getProviderConfig('gitCommitGeniex', 'anthropicModel');
     }
 
     async generateCommitMessage(diffs: DiffData[], options?: GenerateCommitMessageOptions): Promise<LLMResponse | LLMError> {

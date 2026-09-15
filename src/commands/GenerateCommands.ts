@@ -25,12 +25,12 @@ export class GenerateCommands {
         // Generate commit message command
         this.context.subscriptions.push(
             // Accept optional repository arg when invoked from SCM menus
-            vscode.commands.registerCommand('git-commit-genie.generateCommitMessage', (arg?: any) => this.generateCommitMessage(arg))
+            vscode.commands.registerCommand('git-commit-geniex.generateCommitMessage', (arg?: any) => this.generateCommitMessage(arg))
         );
 
         // Cancel generation command
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.cancelGeneration', (arg?: any) => this.cancelGeneration(arg))
+            vscode.commands.registerCommand('git-commit-geniex.cancelGeneration', (arg?: any) => this.cancelGeneration(arg))
         );
     }
 
@@ -55,13 +55,13 @@ export class GenerateCommands {
         const existingKey = await this.context.secrets.get(secretKeyName);
 
         if (!existingKey) {
-            await vscode.commands.executeCommand('git-commit-genie.manageModels');
+            await vscode.commands.executeCommand('git-commit-geniex.manageModels');
             return;
         }
 
         const selectedModel = this.serviceRegistry.getModel(provider);
         if (!selectedModel || !selectedModel.trim()) {
-            await vscode.commands.executeCommand('git-commit-genie.manageModels');
+            await vscode.commands.executeCommand('git-commit-geniex.manageModels');
             return;
         }
 
@@ -98,7 +98,7 @@ export class GenerateCommands {
                 this.inFlight.set(targetRepoPath, cts);
 
                 // Indicate generating state for UI (global visibility)
-                await vscode.commands.executeCommand('setContext', 'gitCommitGenie.generating', true);
+                await vscode.commands.executeCommand('setContext', 'gitCommitGeniex.generating', true);
 
                 const diffs = await this.serviceRegistry.getDiffService().getDiff(targetRepo);
 
@@ -138,14 +138,14 @@ export class GenerateCommands {
                 } catch { /* ignore */ }
                 cts.dispose();
                 // Reset UI context only when no other repo is running
-                await vscode.commands.executeCommand('setContext', 'gitCommitGenie.generating', this.inFlight.size > 0);
+                await vscode.commands.executeCommand('setContext', 'gitCommitGeniex.generating', this.inFlight.size > 0);
             }
         });
     }
 
     private getSecretKeyName(provider: string): string {
         if (provider === 'qwen') {
-            const region = this.context.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+            const region = this.context.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
             return getProviderSecretKey(provider, region);
         }
         return getProviderSecretKey(provider);
@@ -159,7 +159,7 @@ export class GenerateCommands {
      */
     private async initializeRepositoryAnalysis(repositoryPath: string): Promise<void> {
         const enabled = vscode.workspace
-            .getConfiguration('gitCommitGenie.repositoryAnalysis')
+            .getConfiguration('gitCommitGeniex.repositoryAnalysis')
             .get<boolean>('enabled', true);
         if (!enabled) {
             return;
@@ -182,7 +182,7 @@ export class GenerateCommands {
     private async fillCommitMessage(content: string, repo: Repository): Promise<void> {
 
         // Simulate typing effect
-        let typingSpeed: number = vscode.workspace.getConfiguration('gitCommitGenie').get<number>('typingAnimationSpeed', -1);
+        let typingSpeed: number = vscode.workspace.getConfiguration('gitCommitGeniex').get<number>('typingAnimationSpeed', -1);
         typingSpeed = Math.min(typingSpeed, 100);
 
         if (typingSpeed <= 0) {
@@ -208,7 +208,7 @@ export class GenerateCommands {
 
     private async maybeCachePendingRagDocument(repo: Repository, diffs: DiffData[], result: any): Promise<void> {
         try {
-            const ragEnabled = vscode.workspace.getConfiguration('gitCommitGenie.rag').get<boolean>('enabled', false);
+            const ragEnabled = vscode.workspace.getConfiguration('gitCommitGeniex.rag').get<boolean>('enabled', false);
             if (!ragEnabled || !result?.ragMetadata?.changeSetSummary || !result?.ragMetadata?.retrievalFeatures) {
                 return;
             }
@@ -249,10 +249,10 @@ export class GenerateCommands {
                         const service = this.serviceRegistry.getLLMService(provider);
                         await service?.setApiKey(newKey.trim());
                         try { await service?.refreshFromSettings(); } catch { }
-                        await vscode.commands.executeCommand('git-commit-genie.updateStatusBar');
+                        await vscode.commands.executeCommand('git-commit-geniex.updateStatusBar');
                     }
                 } else if (choice === vscode.l10n.t(I18N.actions.manageModels)) {
-                    await vscode.commands.executeCommand('git-commit-genie.manageModels');
+                    await vscode.commands.executeCommand('git-commit-geniex.manageModels');
                 }
             })();
             return;

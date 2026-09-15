@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export const RAG_EMBEDDING_API_KEY_SECRET = 'gitCommitGenie.secret.ragEmbeddingApiKey';
+export const RAG_EMBEDDING_API_KEY_SECRET = 'gitCommitGeniex.secret.ragEmbeddingApiKey';
 export const RAG_STATE_FILE = 'state.json';
 export const RAG_DOCUMENTS_FILE = 'documents.ndjson';
 
@@ -14,7 +14,7 @@ export type RagEmbeddingConfig = {
 };
 
 export async function readEmbeddingConfig(context: vscode.ExtensionContext): Promise<RagEmbeddingConfig> {
-    const ragConfig = vscode.workspace.getConfiguration('gitCommitGenie.rag');
+    const ragConfig = vscode.workspace.getConfiguration('gitCommitGeniex.rag');
     const secretApiKey = (await context.secrets.get(RAG_EMBEDDING_API_KEY_SECRET))?.trim() || '';
 
     return {

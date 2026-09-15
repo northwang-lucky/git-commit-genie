@@ -13,7 +13,7 @@ export enum LogLevel {
 }
 
 export class Logger {
-    private readonly prefix = '[Git Commit Genie]';
+    private readonly prefix = '[Git Commit GenieX]';
 
     private static instance: Logger;
 
@@ -24,7 +24,7 @@ export class Logger {
     private costTracker: CostTrackingService | null = null;
     private webviewProvider: WebviewProvider | null = null;
     private context: vscode.ExtensionContext | null = null;
-    private static readonly LOGS_STATE_KEY = 'gitCommitGenie.webview.logs';
+    private static readonly LOGS_STATE_KEY = 'gitCommitGeniex.webview.logs';
     private logBuffer: LogEntry[] = [];
     private readonly maxLogBuffer = 99;
 
@@ -392,7 +392,7 @@ export class Logger {
                     inputTokens = usage.prompt_tokens ?? usage.input_tokens ?? 0;
                     outputTokens = usage.completion_tokens ?? usage.output_tokens ?? 0;
                     cachedTokens = usage.prompt_tokens_details?.cached_tokens ?? usage.prompt_cache_hit_tokens ?? 0;
-                    const qwenRegion = this.context?.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+                    const qwenRegion = this.context?.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
                     cost = this.calculateCost(model, inputTokens, outputTokens, cachedTokens, qwenRegion);
                 }
             } catch (err) {
@@ -638,7 +638,7 @@ export class Logger {
         // Fallback for Qwen paths that did not pass region explicitly.
         // Use current configured region first, then try intl/china aliases.
         if (!region && modelName.startsWith('qwen') && !PRICING_TABLE[pricingKey]) {
-            const configuredRegion = this.context?.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl');
+            const configuredRegion = this.context?.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl');
             const candidates = [
                 configuredRegion ? `${modelName}:${configuredRegion}` : '',
                 `${modelName}:intl`,
@@ -801,7 +801,7 @@ export class Logger {
         }
 
         // Show notification for cost summary
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex');
         if (cfg.get('showUsageCost', false)) {
             this.showCostNotification(callType, formattedCost, formattedCachePercentage);
         }

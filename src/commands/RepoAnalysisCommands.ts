@@ -14,22 +14,22 @@ export class RepoAnalysisCommands {
     async register(): Promise<void> {
         // View repository analysis
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.viewRepositoryAnalysis', this.viewRepositoryAnalysis.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.viewRepositoryAnalysis', this.viewRepositoryAnalysis.bind(this))
         );
 
         // Refresh repository analysis
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.refreshRepositoryAnalysis', this.refreshRepositoryAnalysis.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.refreshRepositoryAnalysis', this.refreshRepositoryAnalysis.bind(this))
         );
 
         // Cancel repository analysis
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.cancelRepositoryAnalysis', this.cancelRepositoryAnalysis.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.cancelRepositoryAnalysis', this.cancelRepositoryAnalysis.bind(this))
         );
 
         // Clear repository analysis cache (JSON in globalState)
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.clearRepositoryAnalysisCache', this.clearRepositoryAnalysisCache.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.clearRepositoryAnalysisCache', this.clearRepositoryAnalysisCache.bind(this))
         );
     }
 
@@ -152,7 +152,7 @@ export class RepoAnalysisCommands {
 
     private isRepoAnalysisEnabled(): boolean {
         try {
-            return vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis').get<boolean>('enabled', true);
+            return vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis').get<boolean>('enabled', true);
         } catch {
             return true;
         }

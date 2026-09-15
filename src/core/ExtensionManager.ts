@@ -25,7 +25,7 @@ export class ExtensionManager {
 
     async activate(): Promise<void> {
         try {
-            logger.info('Git Commit Genie is activating...');
+            logger.info('Git Commit GenieX is activating...');
 
             // Initialize services
             await this.serviceRegistry.initialize();
@@ -61,13 +61,13 @@ export class ExtensionManager {
 
             // Register clear logs command
             this.context.subscriptions.push(
-                vscode.commands.registerCommand('git-commit-genie.clearLogs', () => {
+                vscode.commands.registerCommand('git-commit-geniex.clearLogs', () => {
                     provider.clearLogsAndStorage();
                     logger.info('Logs cleared for current workspace');
                 })
             );
 
-            logger.info('Git Commit Genie activated successfully');
+            logger.info('Git Commit GenieX activated successfully');
         } catch (error) {
             logger.error('Error during extension activation:', error);
             throw error;
@@ -76,7 +76,7 @@ export class ExtensionManager {
 
     async deactivate(): Promise<void> {
         try {
-            logger.info('Git Commit Genie is deactivating...');
+            logger.info('Git Commit GenieX is deactivating...');
 
             // Cleanup in reverse order
             await this.eventManager.dispose();
@@ -85,7 +85,7 @@ export class ExtensionManager {
             await this.configManager.dispose();
             await this.serviceRegistry.dispose();
 
-            logger.info('Git Commit Genie deactivated successfully');
+            logger.info('Git Commit GenieX deactivated successfully');
         } catch (error) {
             logger.error('Error during extension deactivation:', error);
         }

@@ -10,7 +10,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 		extensionManager = new ExtensionManager(context);
 		await extensionManager.activate();
 	} catch (error) {
-		logger.error('Failed to activate Git Commit Genie:', error);
+		logger.error('Failed to activate Git Commit GenieX:', error);
 		throw error;
 	}
 }

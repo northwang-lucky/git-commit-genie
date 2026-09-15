@@ -107,7 +107,7 @@ export class ServiceRegistry {
             const secretDisp = this.context.secrets.onDidChange(async (e) => {
                 try {
                     const key = e?.key || '';
-                    if (!key.startsWith('gitCommitGenie.secret.')) { return; }
+                    if (!key.startsWith('gitCommitGeniex.secret.')) { return; }
                     const provider = this.secretKeyToProvider(key);
                     if (!provider) { return; }
                     const svc = this.llmServices.get(provider);
@@ -115,7 +115,7 @@ export class ServiceRegistry {
                     // Update current service mapping (no provider switch here)
                     this.updateCurrentLLMService();
                     // Refresh status bar
-                    await (vscode.commands.executeCommand('git-commit-genie.updateStatusBar'));
+                    await (vscode.commands.executeCommand('git-commit-geniex.updateStatusBar'));
                 } catch { /* ignore */ }
             });
             try {
@@ -180,7 +180,7 @@ export class ServiceRegistry {
 
     // Provider and model management
     getProvider(): string {
-        return this.context.globalState.get<string>('gitCommitGenie.provider', 'openai');
+        return this.context.globalState.get<string>('gitCommitGeniex.provider', 'openai');
     }
 
     getModel(provider: string): string {
@@ -270,7 +270,7 @@ export class ServiceRegistry {
 
         // Also migrate repository analysis model override if it points to an unsupported model.
         try {
-            const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+            const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
             let selected = (cfg.get<string>('model', 'general') || 'general').trim();
 
             // Normalize dated Anthropic model names to undated aliases
@@ -307,13 +307,13 @@ export class ServiceRegistry {
         const actionManage = 'Manage Models';
         const actionDismiss = 'Dismiss';
         void vscode.window.showWarningMessage(
-            `Git Commit Genie migrated unsupported model selections after update: ${details}.`,
+            `Git Commit GenieX migrated unsupported model selections after update: ${details}.`,
             actionManage,
             actionDismiss
         ).then(async (choice) => {
             if (choice === actionManage) {
                 try {
-                    await vscode.commands.executeCommand('git-commit-genie.manageModels');
+                    await vscode.commands.executeCommand('git-commit-geniex.manageModels');
                 } catch {
                     // Ignore command execution failures during startup race conditions.
                 }

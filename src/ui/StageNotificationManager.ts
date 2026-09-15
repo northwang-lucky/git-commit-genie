@@ -90,7 +90,7 @@ export class StageNotificationManager {
     // can fail when the extension host is shutting down; treat that as
     // "enabled" so notifications still surface during the shutdown window.
     this.enabled = safeRun('StageNotifications.readConfig', () =>
-      vscode.workspace.getConfiguration('gitCommitGenie').get<boolean>('ui.stageNotifications.enabled', true)
+      vscode.workspace.getConfiguration('gitCommitGeniex').get<boolean>('ui.stageNotifications.enabled', true)
     ) ?? true;
 
     if (!this.enabled) { return; }

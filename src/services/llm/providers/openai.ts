@@ -15,7 +15,7 @@ import { ProviderRuntimeConfig, ProviderRules } from './utils/BaseProviderUtils'
 import { commitMessageSchema } from './schemas/common';
 import { ProviderError } from './errors/ProviderError';
 
-const SECRET_OPENAI_API_KEY = 'gitCommitGenie.secret.openaiApiKey';
+const SECRET_OPENAI_API_KEY = 'gitCommitGeniex.secret.openaiApiKey';
 
 /**
  * OpenAI service implementation
@@ -103,14 +103,14 @@ export class OpenAIService extends BaseLLMService {
      * Get the current model configuration
      */
     protected getCurrentModel(): string {
-        return this.context.globalState.get<string>('gitCommitGenie.openaiModel', '');
+        return this.context.globalState.get<string>('gitCommitGeniex.openaiModel', '');
     }
 
     /**
      * Get OpenAI-specific configuration
      */
     private getConfig() {
-        return this.utils.getProviderConfig('gitCommitGenie', 'openaiModel');
+        return this.utils.getProviderConfig('gitCommitGeniex', 'openaiModel');
     }
 
     private async ensureSupportedModel(model: string): Promise<string> {
@@ -131,7 +131,7 @@ export class OpenAIService extends BaseLLMService {
             return selected;
         }
 
-        await this.context.globalState.update('gitCommitGenie.openaiModel', fallback);
+        await this.context.globalState.update('gitCommitGeniex.openaiModel', fallback);
         logger.warn(`[Genie][OpenAI] Model '${selected}' is unsupported. Auto-switched to '${fallback}'.`);
         return fallback;
     }

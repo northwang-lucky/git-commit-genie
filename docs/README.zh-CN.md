@@ -1,14 +1,16 @@
 <div align="center">
 
-# Git Commit Genie
+# Git Commit GenieX
 
 English version: [English README](../README.md)
 
 </div>
 
+> **Fork 说明**：本项目是 [Nouvelle-Lune/git-commit-genie](https://github.com/Nouvelle-Lune/git-commit-genie) 的 fork，已以 [`northwang-lucky.git-commit-geniex`](https://open-vsx.org/extension/northwang-lucky/git-commit-geniex) 发布到 Open VSX。相较上游 3.2.2，包含 3.2.3 的 DeepSeek 模型列表修复，并使用完全独立的运行时身份（命令 id `git-commit-geniex.*`、配置前缀 `gitCommitGeniex.*`），可与上游扩展共存互不冲突。
+
 ## 概述
 
-Git Commit Genie 基于已暂存的 Git diff，使用主流大模型（OpenAI / DeepSeek / Anthropic / Gemini / Qwen / GLM / Kimi / OpenRouter）自动生成高质量的 Conventional Commits 风格提交信息。内置仓库智能分析功能，自动理解项目结构和技术栈，为提交信息生成提供更好的上下文。支持可选"Thinking 模式"（多步推理）与"用户模板"策略，显著提升结构一致性与团队风格统一。
+Git Commit GenieX 基于已暂存的 Git diff，使用主流大模型（OpenAI / DeepSeek / Anthropic / Gemini / Qwen / GLM / Kimi / OpenRouter）自动生成高质量的 Conventional Commits 风格提交信息。内置仓库智能分析功能，自动理解项目结构和技术栈，为提交信息生成提供更好的上下文。支持可选"Thinking 模式"（多步推理）与"用户模板"策略，显著提升结构一致性与团队风格统一。
 
 <table style="width: 100%; border-spacing: 10px;">
   <tr>
@@ -46,8 +48,8 @@ Git Commit Genie 基于已暂存的 Git diff，使用主流大模型（OpenAI / 
 
 - 少量 / 轻量级提交：优先选择轻巧快速的模型，生成更快、Token 消耗更低。
 - 大型 / 多文件提交：再考虑切换更强的模型，以获得更好的理解与结构质量。
-- 可随时通过命令面板运行 "Git Commit Genie: Manage Models" 切换模型。
- - 可通过命令面板快速切换 Thinking："Git Commit Genie: 启用 / 禁用链式思考模式"。
+- 可随时通过命令面板运行 "Git Commit GenieX: Manage Models" 切换模型。
+ - 可通过命令面板快速切换 Thinking："Git Commit GenieX: 启用 / 禁用链式思考模式"。
 
 ## 核心特性
 
@@ -69,34 +71,34 @@ Git Commit Genie 基于已暂存的 Git diff，使用主流大模型（OpenAI / 
 ## 工作流程
 
 1. 暂存（Stage）你的变更。
-2. 执行命令：`Git Commit Genie: 生成提交信息`（SCM 顶部按钮或命令面板）。
+2. 执行命令：`Git Commit GenieX: 生成提交信息`（SCM 顶部按钮或命令面板）。
 3. 输出写入仓库提交框，可人工微调后提交。
 
 ## 配置项
 
-所有设置位于：`Git Commit Genie`。
+所有设置位于：`Git Commit GenieX`。
 
 | Setting                                             | 类型    | 默认    | 说明                                                                                                                                                 |
 | --------------------------------------------------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gitCommitGenie.autoStageAllForDiff`                | boolean | false   | 仅当暂存区为空时：临时将所有更改加入暂存用于生成 diff，生成后会自动还原暂存状态。谨慎使用，可能会把无关更改包含进提示。                              |
-| `gitCommitGenie.chain.enabled`                      | boolean | false   | 启用链式多步提示生成提交信息（使得生成的提交信息更加详准确，且可以更加贴合用户模版，但将增加延迟与 Token 消耗）                                      |
-| `gitCommitGenie.chain.maxParallel`                  | number  | 2       | 链式提示并行 LLM 调用最大数量。谨慎增大以避免触发速率限制。                                                                                          |
-| `gitCommitGenie.llm.maxRetries`                     | number  | 2       | API请求失败最大重试次数。                                                                                                                            |
-| `gitCommitGenie.llm.temperature`                    | number  | 1       | Temperature（0–2），默认为 1。部分服务商/模型组合只接受 1；修改该值可能触发 invalid-temperature 错误或导致输出稳定性下降。                                      |
-| `gitCommitGenie.rag.enabled`                        | boolean | false   | 启用 RAG 保持 commit message 生成的风格一致性（需要仓库中存在一定数量的历史 commit message 构建本地风格索引）。启用前请先通过"配置 RAG Embedding API Key"命令配置 API Key。 |
-| `gitCommitGenie.rag.embedding.baseUrl`              | string  | `""`    | RAG 使用的 embeddings API Base URL，需兼容 OpenAI SDK 的接口形式。                                                                                     |
-| `gitCommitGenie.rag.embedding.model`                | string  | `""`    | RAG 使用的 embedding 模型。                                                                                                                           |
-| `gitCommitGenie.rag.embedding.dimensions`           | number  | 0       | RAG 使用的可选 embedding 维度（0 = 自动检测）。                                                                                                       |
-| `gitCommitGenie.rag.embedding.batchSize`            | number  | 10      | RAG 生成 embeddings 时使用的批大小（1–512）。                                                                                                          |
-| `gitCommitGenie.repositoryAnalysis.enabled`         | boolean | true    | 启用仓库分析以提供更好的提交信息生成上下文。                                                                                                         |
-| `gitCommitGenie.repositoryAnalysis.excludePatterns` | array   | []      | 仓库分析扫描时要排除的文件模式（gitignore风格）。                                                                                                    |
-| `gitCommitGenie.repositoryAnalysis.updateThreshold` | number  | 10      | 更新仓库分析的提交次数阈值。                                                                                                                         |
-| `gitCommitGenie.repositoryAnalysis.MaxCount`        | number  | 无上限  | 仓库探索过程中允许的最大分析步数。设置为-1表示无上限（默认）。                                                                                       |
-| `gitCommitGenie.repositoryAnalysis.model`           | enum    | general | 用于仓库分析的模型。可选择所有供应商支持的模型，系统将自动切换到该模型所属的服务商；或选择"使用默认模型"以复用主模型。可通过"管理模型"命令进行配置。 |
-| `gitCommitGenie.commitLanguage`                     | string  | `auto`  | 生成的提交信息目标语言。选项：`auto`、`en`、`zh-CN`、`zh-TW`、`ja`、`ko`、`de`、`fr`、`es`、`pt`、`ru`、`it`。                                       |
-| `gitCommitGenie.typingAnimationSpeed`               | number  | 15      | 提交信息框打字动画速度，单位为每字符毫秒。设置 -1 关闭动画。                                                                                         |  |
-| `gitCommitGenie.showUsageCost`                      | boolean | true    | 启用后在生成文本时弹出通知，显示本次生成的估计总费用。                                                                                               |
-| `gitCommitGenie.ui.stageNotifications.enabled`      | boolean | true    | 在 Thinking 过程中在右下角显示阶段通知（精简气泡，无标题）。                                                                                         |
+| `gitCommitGeniex.autoStageAllForDiff`                | boolean | false   | 仅当暂存区为空时：临时将所有更改加入暂存用于生成 diff，生成后会自动还原暂存状态。谨慎使用，可能会把无关更改包含进提示。                              |
+| `gitCommitGeniex.chain.enabled`                      | boolean | false   | 启用链式多步提示生成提交信息（使得生成的提交信息更加详准确，且可以更加贴合用户模版，但将增加延迟与 Token 消耗）                                      |
+| `gitCommitGeniex.chain.maxParallel`                  | number  | 2       | 链式提示并行 LLM 调用最大数量。谨慎增大以避免触发速率限制。                                                                                          |
+| `gitCommitGeniex.llm.maxRetries`                     | number  | 2       | API请求失败最大重试次数。                                                                                                                            |
+| `gitCommitGeniex.llm.temperature`                    | number  | 1       | Temperature（0–2），默认为 1。部分服务商/模型组合只接受 1；修改该值可能触发 invalid-temperature 错误或导致输出稳定性下降。                                      |
+| `gitCommitGeniex.rag.enabled`                        | boolean | false   | 启用 RAG 保持 commit message 生成的风格一致性（需要仓库中存在一定数量的历史 commit message 构建本地风格索引）。启用前请先通过"配置 RAG Embedding API Key"命令配置 API Key。 |
+| `gitCommitGeniex.rag.embedding.baseUrl`              | string  | `""`    | RAG 使用的 embeddings API Base URL，需兼容 OpenAI SDK 的接口形式。                                                                                     |
+| `gitCommitGeniex.rag.embedding.model`                | string  | `""`    | RAG 使用的 embedding 模型。                                                                                                                           |
+| `gitCommitGeniex.rag.embedding.dimensions`           | number  | 0       | RAG 使用的可选 embedding 维度（0 = 自动检测）。                                                                                                       |
+| `gitCommitGeniex.rag.embedding.batchSize`            | number  | 10      | RAG 生成 embeddings 时使用的批大小（1–512）。                                                                                                          |
+| `gitCommitGeniex.repositoryAnalysis.enabled`         | boolean | true    | 启用仓库分析以提供更好的提交信息生成上下文。                                                                                                         |
+| `gitCommitGeniex.repositoryAnalysis.excludePatterns` | array   | []      | 仓库分析扫描时要排除的文件模式（gitignore风格）。                                                                                                    |
+| `gitCommitGeniex.repositoryAnalysis.updateThreshold` | number  | 10      | 更新仓库分析的提交次数阈值。                                                                                                                         |
+| `gitCommitGeniex.repositoryAnalysis.MaxCount`        | number  | 无上限  | 仓库探索过程中允许的最大分析步数。设置为-1表示无上限（默认）。                                                                                       |
+| `gitCommitGeniex.repositoryAnalysis.model`           | enum    | general | 用于仓库分析的模型。可选择所有供应商支持的模型，系统将自动切换到该模型所属的服务商；或选择"使用默认模型"以复用主模型。可通过"管理模型"命令进行配置。 |
+| `gitCommitGeniex.commitLanguage`                     | string  | `auto`  | 生成的提交信息目标语言。选项：`auto`、`en`、`zh-CN`、`zh-TW`、`ja`、`ko`、`de`、`fr`、`es`、`pt`、`ru`、`it`。                                       |
+| `gitCommitGeniex.typingAnimationSpeed`               | number  | 15      | 提交信息框打字动画速度，单位为每字符毫秒。设置 -1 关闭动画。                                                                                         |  |
+| `gitCommitGeniex.showUsageCost`                      | boolean | true    | 启用后在生成文本时弹出通知，显示本次生成的估计总费用。                                                                                               |
+| `gitCommitGeniex.ui.stageNotifications.enabled`      | boolean | true    | 在 Thinking 过程中在右下角显示阶段通知（精简气泡，无标题）。                                                                                         |
 
 
 
@@ -104,27 +106,27 @@ Git Commit Genie 基于已暂存的 Git diff，使用主流大模型（OpenAI / 
 
 在命令面板中搜索以下命令：
 
-- Git Commit Genie: 生成提交信息
-- Git Commit Genie: 停止生成（生成进行中可见）
-- Git Commit Genie: 管理模型
-- Git Commit Genie: 启用 / 禁用链式思考模式
-- Git Commit Genie: 选择/新建模板
-- Git Commit Genie: 查看仓库分析（以可编辑Markdown形式打开分析）
-- Git Commit Genie: 刷新仓库分析（触发新分析）
-- Git Commit Genie: 清理仓库分析缓存（清除分析缓存）
-- Git Commit Genie: 取消仓库分析（取消分析过程）
-- Git Commit Genie: 配置 RAG Embedding API Key（在 SecretStorage 中存储 Embedding API Key）
-- Git Commit Genie: 清除 RAG Embedding API Key（删除 Embedding API Key）
-- Git Commit Genie: 开始 RAG 索引（为所有历史提交建立风格索引）
-- Git Commit Genie: 停止 RAG 索引（取消正在运行的索引任务）
-- Git Commit Genie: 菜单
-- Git Commit Genie: 查看仓库费用
-- Git Commit Genie: 重置仓库费用
+- Git Commit GenieX: 生成提交信息
+- Git Commit GenieX: 停止生成（生成进行中可见）
+- Git Commit GenieX: 管理模型
+- Git Commit GenieX: 启用 / 禁用链式思考模式
+- Git Commit GenieX: 选择/新建模板
+- Git Commit GenieX: 查看仓库分析（以可编辑Markdown形式打开分析）
+- Git Commit GenieX: 刷新仓库分析（触发新分析）
+- Git Commit GenieX: 清理仓库分析缓存（清除分析缓存）
+- Git Commit GenieX: 取消仓库分析（取消分析过程）
+- Git Commit GenieX: 配置 RAG Embedding API Key（在 SecretStorage 中存储 Embedding API Key）
+- Git Commit GenieX: 清除 RAG Embedding API Key（删除 Embedding API Key）
+- Git Commit GenieX: 开始 RAG 索引（为所有历史提交建立风格索引）
+- Git Commit GenieX: 停止 RAG 索引（取消正在运行的索引任务）
+- Git Commit GenieX: 菜单
+- Git Commit GenieX: 查看仓库费用
+- Git Commit GenieX: 重置仓库费用
 
 SCM 标题栏：根据状态显示“Generate commit message”或“Stop generate”按钮。
 
 ## 模板编写
-使用命令 `Git Commit Genie: Select/Create Template` 选择或创建模板文件。
+使用命令 `Git Commit GenieX: Select/Create Template` 选择或创建模板文件。
 
 <img src="../media/demo2.gif" width="600"/>
 

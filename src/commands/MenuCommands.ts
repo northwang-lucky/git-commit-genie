@@ -14,7 +14,7 @@ export class MenuCommands {
     async register(): Promise<void> {
         // Genie menu command
         this.context.subscriptions.push(
-            vscode.commands.registerCommand('git-commit-genie.genieMenu', this.genieMenu.bind(this))
+            vscode.commands.registerCommand('git-commit-geniex.genieMenu', this.genieMenu.bind(this))
         );
     }
 
@@ -59,7 +59,7 @@ export class MenuCommands {
         }
 
         if (pick.action === 'models') {
-            vscode.commands.executeCommand('git-commit-genie.manageModels');
+            vscode.commands.executeCommand('git-commit-geniex.manageModels');
             return;
         }
 
@@ -71,12 +71,12 @@ export class MenuCommands {
 
         switch (pick.action) {
             case 'toggle':
-                vscode.commands.executeCommand('git-commit-genie.toggleChainMode');
+                vscode.commands.executeCommand('git-commit-geniex.toggleChainMode');
             case 'cancel':
-                vscode.commands.executeCommand('git-commit-genie.cancelRepositoryAnalysis');
+                vscode.commands.executeCommand('git-commit-geniex.cancelRepositoryAnalysis');
                 break;
             case 'refresh':
-                vscode.commands.executeCommand('git-commit-genie.refreshRepositoryAnalysis');
+                vscode.commands.executeCommand('git-commit-geniex.refreshRepositoryAnalysis');
                 break;
             case 'open':
                 await this.openMarkdown(repositoryPath);
@@ -98,7 +98,7 @@ export class MenuCommands {
 
     private isRepoAnalysisEnabled(): boolean {
         try {
-            return vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis').get<boolean>('enabled', true);
+            return vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis').get<boolean>('enabled', true);
         } catch {
             return true;
         }

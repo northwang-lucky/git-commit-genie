@@ -7,9 +7,9 @@ import { OpenAIChatCompletionsService } from './openaiChatCompletionsService';
 
 const QWEN_API_URL_CHINA = 'https://dashscope.aliyuncs.com/compatible-mode/v1';
 const QWEN_API_URL_INTL = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
-const SECRET_QWEN_API_KEY_CHINA = 'gitCommitGenie.secret.qwenApiKeyChina';
-const SECRET_QWEN_API_KEY_INTL = 'gitCommitGenie.secret.qwenApiKeyIntl';
-const QWEN_REGION_KEY = 'gitCommitGenie.qwenRegion';
+const SECRET_QWEN_API_KEY_CHINA = 'gitCommitGeniex.secret.qwenApiKeyChina';
+const SECRET_QWEN_API_KEY_INTL = 'gitCommitGeniex.secret.qwenApiKeyIntl';
+const QWEN_REGION_KEY = 'gitCommitGeniex.qwenRegion';
 
 /**
  * Alibaba Qwen LLM service implementation using OpenAI-compatible chat completions.
@@ -19,7 +19,7 @@ export class QwenService extends OpenAIChatCompletionsService {
     constructor(context: vscode.ExtensionContext, templateService: TemplateService, analysisService?: IRepositoryAnalysisService) {
         super(context, templateService, analysisService, {
             providerName: 'Qwen',
-            modelStateKey: 'gitCommitGenie.qwenModel',
+            modelStateKey: 'gitCommitGeniex.qwenModel',
             secretKey: SECRET_QWEN_API_KEY_INTL,
             baseURL: QWEN_API_URL_INTL
         });

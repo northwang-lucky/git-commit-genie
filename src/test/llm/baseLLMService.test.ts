@@ -104,7 +104,7 @@ describe('buildJsonMessage — P1-16 empty-string JSON.parse guard', () => {
         // with commitLanguage = 'en' so buildJsonMessage completes cleanly
         getConfigStub = sinon.stub(vscode.workspace, 'getConfiguration').returns({
             get: sinon.stub()
-                .withArgs('gitCommitGenie.commitLanguage', 'auto').returns('en')
+                .withArgs('gitCommitGeniex.commitLanguage', 'auto').returns('en')
                 .withArgs('enabled', true).returns(false),
         } as any);
 

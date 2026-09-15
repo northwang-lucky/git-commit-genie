@@ -71,7 +71,7 @@ function stripRepositoryAnalysisMarkdownTitle(summary: string): string {
  */
 export class RepositoryAnalysisService implements IRepositoryAnalysisService {
     private static readonly ANALYSIS_MD_FILE_NAME = 'repository-analysis.md';
-    private static readonly ANALYSIS_STATE_KEY_PREFIX = 'gitCommitGenie.analysis.';
+    private static readonly ANALYSIS_STATE_KEY_PREFIX = 'gitCommitGeniex.analysis.';
 
     private llmService: LLMService | null;
     private resolveLLMService?: (provider: string) => (LLMService | undefined);
@@ -124,7 +124,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
      * @returns Configuration object with enabled status, exclude patterns, and update threshold
      */
     private getConfig(): AnalysisConfig {
-        const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+        const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
         return {
             enabled: cfg.get<boolean>('enabled', true),
             excludePatterns: cfg.get<string[]>('excludePatterns', []),
@@ -662,12 +662,12 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
 
         // For Qwen models, track region for usage logging
         const qwenRegion = normalizedProvider === 'qwen'
-            ? (this.context.globalState.get<string>('gitCommitGenie.qwenRegion', 'intl') as 'china' | 'intl')
+            ? (this.context.globalState.get<string>('gitCommitGeniex.qwenRegion', 'intl') as 'china' | 'intl')
             : undefined;
 
 
         // Limit total thinking/acting steps to prevent runaway loops
-        let maxSteps = vscode.workspace.getConfiguration('gitCommitGenie').get<number>('repositoryAnalysis.MaxCount', 99999);
+        let maxSteps = vscode.workspace.getConfiguration('gitCommitGeniex').get<number>('repositoryAnalysis.MaxCount', 99999);
         if (maxSteps === -1) {
             maxSteps = 99999;
         }
@@ -1163,10 +1163,10 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
      */
     private pickRepoAnalysisService(): { provider: string, service: LLMService | null } {
         try {
-            const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+            const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
             const selectedModel = (cfg.get<string>('model', 'general') || 'general').trim();
             if (!selectedModel || selectedModel === 'general') {
-                const p = (this.context.globalState.get<string>('gitCommitGenie.provider', 'openai') || 'openai').toLowerCase();
+                const p = (this.context.globalState.get<string>('gitCommitGeniex.provider', 'openai') || 'openai').toLowerCase();
                 return { provider: p, service: this.llmService };
             }
             const candidates = getAllProviderKeys();
@@ -1178,10 +1178,10 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
                     }
                 } catch { /* ignore */ }
             }
-            const p = (this.context.globalState.get<string>('gitCommitGenie.provider', 'openai') || 'openai').toLowerCase();
+            const p = (this.context.globalState.get<string>('gitCommitGeniex.provider', 'openai') || 'openai').toLowerCase();
             return { provider: p, service: this.llmService };
         } catch {
-            const p = (this.context.globalState.get<string>('gitCommitGenie.provider', 'openai') || 'openai').toLowerCase();
+            const p = (this.context.globalState.get<string>('gitCommitGeniex.provider', 'openai') || 'openai').toLowerCase();
             return { provider: p, service: this.llmService };
         }
     }
@@ -1197,7 +1197,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
      */
     private getActiveModelForProvider(provider: string): string | undefined {
         try {
-            const cfg = vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis');
+            const cfg = vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis');
             const selected = (cfg.get<string>('model', 'general') || 'general').trim();
             if (selected && selected !== 'general') {
                 const svc = this.resolveLLMService?.(provider) || this.llmService;
@@ -1244,7 +1244,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
                 await vscode.window.showWarningMessage(
                     `${err.message}`,
                 );
-                void vscode.commands.executeCommand('git-commit-genie.cancelRepositoryAnalysis');
+                void vscode.commands.executeCommand('git-commit-geniex.cancelRepositoryAnalysis');
             } catch { }
             return null;
         }
@@ -1257,7 +1257,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
                     vscode.l10n.t(I18N.actions.dismiss)
                 );
                 if (choice === vscode.l10n.t(I18N.actions.manageModels)) {
-                    void vscode.commands.executeCommand('git-commit-genie.manageModels');
+                    void vscode.commands.executeCommand('git-commit-geniex.manageModels');
                 }
             } catch { }
             return null;
@@ -1276,7 +1276,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
                     vscode.l10n.t(I18N.actions.dismiss)
                 ).then(choice => {
                     if (choice === vscode.l10n.t(I18N.actions.openSettings)) {
-                        void vscode.commands.executeCommand('workbench.action.openSettings', 'gitCommitGenie.chain.maxParallel');
+                        void vscode.commands.executeCommand('workbench.action.openSettings', 'gitCommitGeniex.chain.maxParallel');
                     }
                 });
             } catch { }
@@ -1312,7 +1312,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
         const selected = this.pickRepoAnalysisService();
         const disp = this.context.secrets.onDidChange(async (e) => {
             try {
-                if (!e?.key || !e.key.startsWith('gitCommitGenie.secret.')) { return; }
+                if (!e?.key || !e.key.startsWith('gitCommitGeniex.secret.')) { return; }
                 try { await selected.service?.refreshFromSettings(); } catch { }
                 const d = this.apiKeyWaiters.get(repositoryPath);
                 if (d) { try { d.dispose(); } catch { } this.apiKeyWaiters.delete(repositoryPath); }
@@ -1340,7 +1340,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
                 vscode.l10n.t(I18N.actions.dismiss)
             );
             if (action === vscode.l10n.t(I18N.actions.manageModels)) {
-                void vscode.commands.executeCommand('git-commit-genie.manageModels');
+                void vscode.commands.executeCommand('git-commit-geniex.manageModels');
             }
         } catch { }
     }
@@ -1414,7 +1414,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
             if (fs.existsSync(gitignorePath)) {
                 try { existing = fs.readFileSync(gitignorePath, 'utf-8'); } catch { existing = ''; }
             }
-            const toAppend = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit Genie data');
+            const toAppend = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit GenieX data');
             if (!toAppend) { return; }
             fs.appendFileSync(gitignorePath, toAppend, { encoding: 'utf-8' });
         } catch (error) {

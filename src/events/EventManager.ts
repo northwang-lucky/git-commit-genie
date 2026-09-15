@@ -256,7 +256,7 @@ export class EventManager {
 
     private isRepoAnalysisEnabled(): boolean {
         try {
-            return vscode.workspace.getConfiguration('gitCommitGenie.repositoryAnalysis').get<boolean>('enabled', true);
+            return vscode.workspace.getConfiguration('gitCommitGeniex.repositoryAnalysis').get<boolean>('enabled', true);
         } catch {
             return true;
         }

@@ -53,7 +53,7 @@ export class DiffService {
 		});
 
 		if (indexChanges.length === 0) {
-			const autoStage = vscode.workspace.getConfiguration().get<boolean>('gitCommitGenie.autoStageAllForDiff', false);
+			const autoStage = vscode.workspace.getConfiguration().get<boolean>('gitCommitGeniex.autoStageAllForDiff', false);
 			if (autoStage) {
 				try {
 					await runGit(['add', '-A']);

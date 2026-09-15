@@ -49,12 +49,12 @@ export const QWEN_REGIONS: Record<string, QwenRegionConfig> = {
     intl: {
         region: 'intl',
         label: 'International',
-        secretKey: 'gitCommitGenie.secret.qwenApiKeyIntl'
+        secretKey: 'gitCommitGeniex.secret.qwenApiKeyIntl'
     },
     china: {
         region: 'china',
         label: 'China',
-        secretKey: 'gitCommitGenie.secret.qwenApiKeyChina'
+        secretKey: 'gitCommitGeniex.secret.qwenApiKeyChina'
     }
 };
 
@@ -66,45 +66,45 @@ export const PROVIDER_CONFIGS: Record<ProviderKey, ProviderMetadata> = {
     openai: {
         key: 'openai',
         label: 'OpenAI',
-        secretKey: 'gitCommitGenie.secret.openaiApiKey',
-        modelStateKey: 'gitCommitGenie.openaiModel',
+        secretKey: 'gitCommitGeniex.secret.openaiApiKey',
+        modelStateKey: 'gitCommitGeniex.openaiModel',
         apiStyle: 'openai-responses'
     },
     deepseek: {
         key: 'deepseek',
         label: 'DeepSeek',
-        secretKey: 'gitCommitGenie.secret.deepseekApiKey',
-        modelStateKey: 'gitCommitGenie.deepseekModel',
+        secretKey: 'gitCommitGeniex.secret.deepseekApiKey',
+        modelStateKey: 'gitCommitGeniex.deepseekModel',
         apiStyle: 'openai-chat',
         baseUrl: 'https://api.deepseek.com'
     },
     anthropic: {
         key: 'anthropic',
         label: 'Anthropic',
-        secretKey: 'gitCommitGenie.secret.anthropicApiKey',
-        modelStateKey: 'gitCommitGenie.anthropicModel',
+        secretKey: 'gitCommitGeniex.secret.anthropicApiKey',
+        modelStateKey: 'gitCommitGeniex.anthropicModel',
         apiStyle: 'anthropic'
     },
     gemini: {
         key: 'gemini',
         label: 'Gemini',
-        secretKey: 'gitCommitGenie.secret.geminiApiKey',
-        modelStateKey: 'gitCommitGenie.geminiModel',
+        secretKey: 'gitCommitGeniex.secret.geminiApiKey',
+        modelStateKey: 'gitCommitGeniex.geminiModel',
         apiStyle: 'gemini'
     },
     qwen: {
         key: 'qwen',
         label: 'Qwen',
-        secretKey: 'gitCommitGenie.secret.qwenApiKey', // Default key (fallback)
-        modelStateKey: 'gitCommitGenie.qwenModel',
+        secretKey: 'gitCommitGeniex.secret.qwenApiKey', // Default key (fallback)
+        modelStateKey: 'gitCommitGeniex.qwenModel',
         hasRegionalVariants: true,
         apiStyle: 'openai-chat'
     },
     glm: {
         key: 'glm',
         label: 'GLM',
-        secretKey: 'gitCommitGenie.secret.glmApiKey',
-        modelStateKey: 'gitCommitGenie.glmModel',
+        secretKey: 'gitCommitGeniex.secret.glmApiKey',
+        modelStateKey: 'gitCommitGeniex.glmModel',
         apiStyle: 'openai-chat',
         baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
         hasRegionalVariants: true
@@ -112,8 +112,8 @@ export const PROVIDER_CONFIGS: Record<ProviderKey, ProviderMetadata> = {
     kimi: {
         key: 'kimi',
         label: 'Kimi',
-        secretKey: 'gitCommitGenie.secret.kimiApiKey',
-        modelStateKey: 'gitCommitGenie.kimiModel',
+        secretKey: 'gitCommitGeniex.secret.kimiApiKey',
+        modelStateKey: 'gitCommitGeniex.kimiModel',
         apiStyle: 'openai-chat',
         baseUrl: 'https://api.moonshot.ai/v1',
         hasRegionalVariants: true
@@ -121,16 +121,16 @@ export const PROVIDER_CONFIGS: Record<ProviderKey, ProviderMetadata> = {
     openrouter: {
         key: 'openrouter',
         label: 'OpenRouter',
-        secretKey: 'gitCommitGenie.secret.openrouterApiKey',
-        modelStateKey: 'gitCommitGenie.openrouterModel',
+        secretKey: 'gitCommitGeniex.secret.openrouterApiKey',
+        modelStateKey: 'gitCommitGeniex.openrouterModel',
         apiStyle: 'openai-chat',
         baseUrl: 'https://openrouter.ai/api/v1'
     },
     local: {
         key: 'local',
         label: 'Local',
-        secretKey: 'gitCommitGenie.secret.localApiKey',
-        modelStateKey: 'gitCommitGenie.localModel',
+        secretKey: 'gitCommitGeniex.secret.localApiKey',
+        modelStateKey: 'gitCommitGeniex.localModel',
         apiStyle: 'openai-chat'
     }
 };

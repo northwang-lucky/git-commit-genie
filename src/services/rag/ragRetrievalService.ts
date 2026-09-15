@@ -541,7 +541,7 @@ export class RagRetrievalService {
             return null;
         }
 
-        const storageDir = path.join(gitDir, 'git-commit-genie', 'rag');
+        const storageDir = path.join(gitDir, 'git-commit-geniex', 'rag');
         const state = await this.readState(storageDir);
         if (!state?.commitCount) {
             this.indexCache.delete(storageDir);

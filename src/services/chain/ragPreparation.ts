@@ -40,7 +40,7 @@ type RagPreparationResponse = {
 };
 
 export function isRagPreparationEnabled(): boolean {
-    return vscode.workspace.getConfiguration("gitCommitGenie.rag").get<boolean>("enabled", false);
+    return vscode.workspace.getConfiguration("gitCommitGeniex.rag").get<boolean>("enabled", false);
 }
 
 export async function prepareRagContext(

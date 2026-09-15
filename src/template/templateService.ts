@@ -162,7 +162,7 @@ export class TemplateService {
 				existing = fs.readFileSync(gitignorePath, 'utf-8');
 			}
 
-			const content = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit Genie templates');
+			const content = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit GenieX templates');
 			if (!content) {
 				return;
 			}

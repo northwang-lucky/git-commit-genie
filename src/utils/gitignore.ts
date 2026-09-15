@@ -8,7 +8,7 @@ export const GIT_GENIE_IGNORE_ENTRY = '.gitgenie/**';
  *
  * @param existing Existing .gitignore content.
  * @param sectionLabel Human-readable comment for the generated section.
- * @returns Content to append, or null when Git Commit Genie is already ignored.
+ * @returns Content to append, or null when Git Commit GenieX is already ignored.
  */
 export function buildGitGenieIgnoreAppend(
     existing: string,

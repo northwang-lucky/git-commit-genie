@@ -31,10 +31,10 @@ describe('BaseProviderUtils.getCommonConfig', () => {
     });
 
     describe('happy path', () => {
-        it('should use scoped gitCommitGenie configuration', () => {
+        it('should use scoped gitCommitGeniex configuration', () => {
             utils.getCommonConfig();
-            assert.ok(getConfigStub.calledWith('gitCommitGenie'),
-                'getConfiguration should be called with "gitCommitGenie" scope');
+            assert.ok(getConfigStub.calledWith('gitCommitGeniex'),
+                'getConfiguration should be called with "gitCommitGeniex" scope');
         });
 
         it('should use chain.enabled key with true default', () => {
@@ -148,8 +148,8 @@ describe('BaseProviderUtils.getCommonConfig', () => {
 
             const config = utils.getCommonConfig();
 
-            assert.ok(getConfigStub.calledWith('gitCommitGenie'),
-                'should use scoped gitCommitGenie config');
+            assert.ok(getConfigStub.calledWith('gitCommitGeniex'),
+                'should use scoped gitCommitGeniex config');
             assert.ok(configGetStub.calledWith('chain.enabled', sinon.match.any),
                 'should read chain.enabled');
             assert.ok(configGetStub.calledWith('chain.maxParallel', sinon.match.any),
@@ -170,17 +170,17 @@ describe('BaseProviderUtils.getCommonConfig', () => {
             assert.strictEqual(config.maxRetries, 2);
         });
 
-        it('should not use unscoped config (no gitCommitGenie prefix in key)', () => {
-            // The scoped config is retrieved via getConfiguration('gitCommitGenie'),
+        it('should not use unscoped config (no gitCommitGeniex prefix in key)', () => {
+            // The scoped config is retrieved via getConfiguration('gitCommitGeniex'),
             // so keys should NOT include the prefix
             configGetStub.returns(undefined);
             utils.getCommonConfig();
 
-            // Keys must be chain.enabled, not gitCommitGenie.chain.enabled
+            // Keys must be chain.enabled, not gitCommitGeniex.chain.enabled
             const allCalls = configGetStub.getCalls().map(c => c.args[0]);
             for (const key of allCalls) {
-                assert.strictEqual(key.startsWith('gitCommitGenie.'), false,
-                    `key "${key}" should NOT have gitCommitGenie. prefix`);
+                assert.strictEqual(key.startsWith('gitCommitGeniex.'), false,
+                    `key "${key}" should NOT have gitCommitGeniex. prefix`);
             }
         });
     });
@@ -209,9 +209,9 @@ describe('BaseProviderUtils.getMaxRetries', () => {
     });
 
     describe('happy path', () => {
-        it('should use scoped gitCommitGenie configuration', () => {
+        it('should use scoped gitCommitGeniex configuration', () => {
             utils.getMaxRetries();
-            assert.ok(getConfigStub.calledWith('gitCommitGenie'));
+            assert.ok(getConfigStub.calledWith('gitCommitGeniex'));
         });
 
         it('should read llm.maxRetries key with default 2', () => {
@@ -295,9 +295,9 @@ describe('BaseProviderUtils.getTemperature', () => {
     });
 
     describe('happy path', () => {
-        it('should use scoped gitCommitGenie configuration', () => {
+        it('should use scoped gitCommitGeniex configuration', () => {
             utils.getTemperature();
-            assert.ok(getConfigStub.calledWith('gitCommitGenie'));
+            assert.ok(getConfigStub.calledWith('gitCommitGeniex'));
         });
 
         it('should read llm.temperature key with default 1', () => {
@@ -384,9 +384,9 @@ describe('BaseProviderUtils.getProviderConfig', () => {
             configGetStub.withArgs('chain.enabled', true).returns(true);
             configGetStub.withArgs('chain.maxParallel', 2).returns(2);
             configGetStub.withArgs('llm.maxRetries', 2).returns(2);
-            globalStateGet.withArgs('gitCommitGenie.openaiModel').returns('gpt-4o');
+            globalStateGet.withArgs('gitCommitGeniex.openaiModel').returns('gpt-4o');
 
-            const config = utils.getProviderConfig('gitCommitGenie', 'openaiModel');
+            const config = utils.getProviderConfig('gitCommitGeniex', 'openaiModel');
 
             assert.strictEqual(config.model, 'gpt-4o');
             assert.strictEqual(config.useChain, true);
@@ -407,7 +407,7 @@ describe('BaseProviderUtils.getProviderConfig', () => {
         it('should default model to empty string when not set in globalState', () => {
             globalStateGet.returns(undefined);
             configGetStub.returns(undefined);
-            const config = utils.getProviderConfig('gitCommitGenie', 'openaiModel');
+            const config = utils.getProviderConfig('gitCommitGeniex', 'openaiModel');
             assert.strictEqual(config.model, '');
         });
     });
