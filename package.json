@@ -3,7 +3,7 @@
   "displayName": "%displayName%",
   "publisher": "northwang-lucky",
   "description": "%description%",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "license": "MIT",
   "engines": {
     "vscode": "^1.103.0"

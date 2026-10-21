@@ -1,5 +1,8 @@
 # Changelog
 
+## [3.3.0]
+- feat: `.gitgenie/` ignore entries are now written to the repository-local `.git/info/exclude` instead of the tracked `.gitignore`, so the extension no longer modifies files that are meant to be committed; `.git` pointer files (worktrees/submodules) and the worktree `commondir` indirection are resolved correctly.
+
 ## [3.2.3]
 - chore: Published this fork to Open VSX as `northwang-lucky.git-commit-geniex` with fully independent runtime identities (commands `git-commit-geniex.*`, settings prefix `gitCommitGeniex.*`) so it can coexist with the upstream extension.
 - fix: DeepSeek model listing now treats the live `/v1/models` response as the source of truth (new opt-in `useApiModelListing` provider option), so officially renamed models show up in Manage Models immediately; the curated list (`deepseek-flash`, `deepseek-v4-pro`) remains as offline fallback and default-model preference.
