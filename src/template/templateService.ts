@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { L10N_KEYS as I18N } from '../i18n/keys';
 import { logger } from '../services/logger';
-import { buildGitGenieIgnoreAppend } from '../utils/gitignore';
+import { ensureGitGenieExcluded } from '../utils/gitignore';
 
 // Default starter template placed into new files
 const DEFAULT_TEMPLATE = `Strongly Opinionated Conventional Commit Template\n\nHeader (must follow Conventional Commits):\n<type>(<scope>)!: <description>\n- type: feat | fix | docs | style | refactor | perf | test | build | ci | chore\n- scope: optional; keep short.\n- description: imperative, ≤ 72 chars.\n\nBody:\n- Summarize the changes with short bullets or short paragraphs.\n- Keep each bullet to one sentence.\n- Prefer active voice.\n- Mention risks/limitations if relevant.\n\nFooters:\n- Refs: <ticket or issue id> (optional)\n- Breaking-Change: <reason> (when applicable)\n`;
@@ -53,29 +53,6 @@ export class TemplateService {
 		return dir;
 	}
 
-	private async getRepoIgnoreFilePath(targetFolder?: vscode.WorkspaceFolder): Promise<string | null> {
-		const gitExtension = vscode.extensions.getExtension('vscode.git');
-		if (!gitExtension || !gitExtension.isActive) {
-			return null;
-		}
-		const gitExports = gitExtension.exports;
-		const api = gitExports?.getAPI?.(1);
-		if (!api || !api.repositories?.length) { return null; }
-
-		let repo = api.repositories[0];
-		if (targetFolder) {
-			const folderPath = targetFolder.uri.fsPath;
-			const matched = api.repositories.find((r: any) =>
-				folderPath === r.rootUri.fsPath || folderPath.startsWith(r.rootUri.fsPath + path.sep)
-			);
-			if (matched) { repo = matched; }
-		}
-
-		const gitignorePath = path.join(repo.rootUri.fsPath, '.gitignore');
-		if (!ensureDir(path.dirname(gitignorePath), true)) { return null; }
-		return gitignorePath;
-	}
-
 	private async pickWorkspaceFolder(): Promise<vscode.WorkspaceFolder | undefined> {
 		const folders = vscode.workspace.workspaceFolders;
 		if (!folders || folders.length === 0) { return undefined; }
@@ -112,8 +89,8 @@ export class TemplateService {
 			return undefined;
 		}
 
-		// Update .gitignore only when creating directory for the first time
-		await this.updateGitignoreForTemplates(folder);
+		// Update .git/info/exclude only when creating directory for the first time
+		await this.ensureGitExcludeForTemplates(folder);
 		return dir;
 	}
 
@@ -150,27 +127,15 @@ export class TemplateService {
 		return repo?.rootUri?.fsPath ?? targetFolder?.uri.fsPath;
 	}
 
-	private async updateGitignoreForTemplates(folder: vscode.WorkspaceFolder): Promise<void> {
-		const gitignorePath = await this.getRepoIgnoreFilePath(folder);
-		if (!gitignorePath) {
-			return;
-		}
-
+	private async ensureGitExcludeForTemplates(folder: vscode.WorkspaceFolder): Promise<void> {
 		try {
-			let existing = '';
-			if (fs.existsSync(gitignorePath)) {
-				existing = fs.readFileSync(gitignorePath, 'utf-8');
-			}
-
-			const content = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit GenieX templates');
-			if (!content) {
-				return;
-			}
-
-			fs.appendFileSync(gitignorePath, content, { encoding: 'utf-8' });
+			// 复用仓库根路径解析；非 git 仓库时 ensureGitGenieExcluded 会自动跳过
+			const repoRoot = await this.getRepoRootPath(folder);
+			if (!repoRoot) { return; }
+			ensureGitGenieExcluded(repoRoot, 'Ignore Git Commit GenieX templates');
 		} catch (error) {
 			// Silent error handling, does not affect core functionality
-			logger.warn('Failed to update .gitignore:', error);
+			logger.warn('Failed to update .git/info/exclude:', error);
 		}
 	}
 

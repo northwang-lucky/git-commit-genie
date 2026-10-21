@@ -32,7 +32,7 @@ import { compressContext } from './tools/compressionTools';
 import { compactToolResultForConversation } from './tools/formattingTools';
 import { DirectoryEntry, SearchFilesResult, ToolResult } from './tools/toolTypes';
 import { getMaxContextByFunction } from './tools/modelContext';
-import { buildGitGenieIgnoreAppend } from '../../utils/gitignore';
+import { ensureGitGenieExcluded } from '../../utils/gitignore';
 
 const REPOSITORY_ANALYSIS_MARKDOWN_TITLE = '# Repository Analysis Summary';
 
@@ -1361,7 +1361,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
      * 
      * Creates a markdown summary of the repository analysis and saves it
      * to the .gitgenie directory. Also ensures the directory is added to
-     * .gitignore to prevent committing analysis data.
+     * .git/info/exclude to prevent committing analysis data.
      * 
      * @param repositoryPath The repository path where to save the file
      * @param analysis The analysis data to save as markdown
@@ -1376,7 +1376,7 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
         const mdPath = this.getAnalysisMarkdownFilePath(repositoryPath);
         const mdDir = path.dirname(mdPath);
         if (!fs.existsSync(mdDir)) { fs.mkdirSync(mdDir, { recursive: true }); }
-        await this.ensureGitignoreForGitGenie(repositoryPath);
+        this.ensureGitExcludeForGitGenie(repositoryPath);
         if (fs.existsSync(mdPath) && opts?.overwrite === false) { return mdPath; }
         const summaryBody = stripRepositoryAnalysisMarkdownTitle(analysis.summary);
         const content = [
@@ -1400,25 +1400,18 @@ export class RepositoryAnalysisService implements IRepositoryAnalysisService {
     }
 
     /**
-     * Ensures the .gitgenie directory is added to .gitignore
+     * Ensures the .gitgenie directory is added to .git/info/exclude
      * 
-     * Adds an entry to the repository's .gitignore file to prevent
+     * Adds an entry to the repository's local exclude file to prevent
      * committing the analysis data stored in the .gitgenie directory.
      * 
      * @param repositoryPath The repository path
      */
-    private async ensureGitignoreForGitGenie(repositoryPath: string): Promise<void> {
+    private ensureGitExcludeForGitGenie(repositoryPath: string): void {
         try {
-            const gitignorePath = path.join(repositoryPath, '.gitignore');
-            let existing = '';
-            if (fs.existsSync(gitignorePath)) {
-                try { existing = fs.readFileSync(gitignorePath, 'utf-8'); } catch { existing = ''; }
-            }
-            const toAppend = buildGitGenieIgnoreAppend(existing, 'Ignore Git Commit GenieX data');
-            if (!toAppend) { return; }
-            fs.appendFileSync(gitignorePath, toAppend, { encoding: 'utf-8' });
+            ensureGitGenieExcluded(repositoryPath, 'Ignore Git Commit GenieX data');
         } catch (error) {
-            logger.warn('[Genie][RepoAnalysis] Failed to update .gitignore for .gitgenie', error as any);
+            logger.warn('[Genie][RepoAnalysis] Failed to update .git/info/exclude for .gitgenie', error as any);
         }
     }
 
